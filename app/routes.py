@@ -54,6 +54,7 @@ def reset_db():
     porchfest1 = Porchfest.query.get(1)
     for porch in porchfest1.porches:
         for artist in porch.hosting:
-            print("{} is playing at {}".format(artist.name, porch.name))
+            show = artist.playing[0]
+            print("{} is playing at {} from {} to {}".format(show.artist.name, show.porch.name, show.start_time, show.end_time))
     return render_template('index.html')
 

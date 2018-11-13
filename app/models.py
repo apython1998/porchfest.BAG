@@ -13,11 +13,14 @@ class Location(db.Model):
     city = db.Column(db.String(256), index=True)
     state = db.Column(db.String(64), index=True)
     zip_code = db.Column(db.Integer, index=True)
-
-    __table_args__ = (UniqueConstraint('city', 'state', 'zip_code', name='uniqueLocation'),)
+    artists = db.relationship('Artist', backref='location', lazy='dynamic')
+    porchfests = db.relationship('Porchfest', backref='location', lazy='dynamic')
+    porches = db.relationship('Porch', backref='location', lazy='dynamic')
 
     def __repr__(self):
         return '<Location {}, {}>'.format(self.city, self.state)
+
+    __table_args__ = (UniqueConstraint('city', 'state', 'zip_code', name='uniqueLocation'),)
 
 
 class Porchfest(db.Model):
@@ -27,10 +30,10 @@ class Porchfest(db.Model):
     end_time = db.Column(db.DateTime, default=datetime.utcnow)
     porches = db.relationship('Porch', backref='porches', lazy='dynamic')
 
-    __table_args__ = (UniqueConstraint('location_id', 'start_time', name='uniquePorchfest'),)
-
     def __repr__(self):
         return '<Porchfest in {}, {}>'.format(self.location_id.city, self.location_id.state)
+
+    __table_args__ = (UniqueConstraint('location_id', 'start_time', name='uniquePorchfest'),)
 
 
 class Artist(UserMixin, db.Model):
@@ -46,7 +49,7 @@ class Artist(UserMixin, db.Model):
     playing = db.relationship('ArtistToPorch', backref='shows', lazy='dynamic')
 
     def __repr__(self):
-        return '<Artist {}>'.format(self.email)
+        return '<Artist {}>'.format(self.name)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -66,10 +69,10 @@ class Porch(db.Model):
     time_available_end = db.Column(db.DateTime, default=datetime.utcnow)
     hosting = db.relationship('Artist', secondary='artist_to_porch')
 
-    __table_args__ = (UniqueConstraint('address', 'location_id', 'porchfest_id', name='uniquePorch'),)
-
     def __repr__(self):
         return '<Porch {}>'.format(self.name)
+
+    __table_args__ = (UniqueConstraint('address', 'location_id', 'porchfest_id', name='uniquePorch'),)
 
 
 class ArtistToPorch(db.Model):
@@ -78,5 +81,8 @@ class ArtistToPorch(db.Model):
     porch_id = db.Column(db.Integer, db.ForeignKey('porch.id'))
     start_time = db.Column(db.DateTime, default=datetime.utcnow)
     end_time = db.Column(db.DateTime, default=datetime.utcnow)
-    artist = db.relationship('Artist', backref='artist')
-    porch = db.relationship('Porch', backref='porch')
+    artist = db.relationship('Artist', backref='artistShow')
+    porch = db.relationship('Porch', backref='porchShows')
+
+    def __repr__(self):
+        return '<Show {} at {}>'.format(self.artist.name, self.porch.name)
