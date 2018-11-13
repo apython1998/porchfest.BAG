@@ -1,8 +1,8 @@
-"""v0 initial db created
+"""v0 of database
 
-Revision ID: fa3914195e16
+Revision ID: 9b93b96960a7
 Revises: 
-Create Date: 2018-11-13 17:09:25.495603
+Create Date: 2018-11-13 17:32:48.916979
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'fa3914195e16'
+revision = '9b93b96960a7'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -51,7 +51,8 @@ def upgrade():
     sa.Column('start_time', sa.DateTime(), nullable=True),
     sa.Column('end_time', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['location_id'], ['location.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('location_id', 'start_time', name='uniquePorchfest')
     )
     op.create_table('porch',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -65,7 +66,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['location_id'], ['location.id'], ),
     sa.ForeignKeyConstraint(['porchfest_id'], ['porchfest.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('address', 'location_id', 'porchfest_id', name='uniquePorc')
+    sa.UniqueConstraint('address', 'location_id', 'porchfest_id', name='uniquePorch')
     )
     op.create_table('artist_to_porch',
     sa.Column('id', sa.Integer(), nullable=False),

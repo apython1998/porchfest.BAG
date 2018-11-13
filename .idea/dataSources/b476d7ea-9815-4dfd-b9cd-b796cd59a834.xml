@@ -228,7 +228,7 @@ porchfest_id</ColNames>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="59" parent="10" name="uniquePorc">
+    <key id="59" parent="10" name="uniquePorch">
       <ColNames>address
 location_id
 porchfest_id</ColNames>
@@ -261,32 +261,44 @@ porchfest_id</ColNames>
       <Position>4</Position>
       <DataType>DATETIME|0s</DataType>
     </column>
-    <key id="66" parent="11">
+    <index id="66" parent="11" name="sqlite_autoindex_porchfest_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>location_id
+start_time</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="67" parent="11">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="67" parent="11">
+    <key id="68" parent="11" name="uniquePorchfest">
+      <ColNames>location_id
+start_time</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_porchfest_1</UnderlyingIndexName>
+    </key>
+    <foreign-key id="69" parent="11">
       <ColNames>location_id</ColNames>
       <RefTableName>location</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="68" parent="12" name="type">
+    <column id="70" parent="12" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="69" parent="12" name="name">
+    <column id="71" parent="12" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="70" parent="12" name="tbl_name">
+    <column id="72" parent="12" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="71" parent="12" name="rootpage">
+    <column id="73" parent="12" name="rootpage">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="72" parent="12" name="sql">
+    <column id="74" parent="12" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>

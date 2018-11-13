@@ -25,6 +25,9 @@ class Porchfest(db.Model):
     location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
     start_time = db.Column(db.DateTime, default=datetime.utcnow)
     end_time = db.Column(db.DateTime, default=datetime.utcnow)
+    porches = db.relationship('Porch', backref='porches', lazy='dynamic')
+
+    __table_args__ = (UniqueConstraint('location_id', 'start_time', name='uniquePorchfest'),)
 
     def __repr__(self):
         return '<Porchfest in {}, {}>'.format(self.location_id.city, self.location_id.state)
@@ -40,7 +43,7 @@ class Artist(UserMixin, db.Model):
     spotify_url = db.Column(db.String(256))
     youtube_url = db.Column(db.String(256))
     facebook_url = db.Column(db.String(256))
-    playing = db.relationship('Show', backref='artist_to_porch', lazy='dynamic')
+    playing = db.relationship('ArtistToPorch', backref='shows', lazy='dynamic')
 
     def __repr__(self):
         return '<Artist {}>'.format(self.email)
@@ -61,9 +64,9 @@ class Porch(db.Model):
     porchfest_id = db.Column(db.Integer, db.ForeignKey('porchfest.id'))
     time_available_start = db.Column(db.DateTime, default=datetime.utcnow)
     time_available_end = db.Column(db.DateTime, default=datetime.utcnow)
-    hosting = db.relationship('Artists', secondary='artist_to_porch')
+    hosting = db.relationship('Artist', secondary='artist_to_porch')
 
-    __table_args__ = (UniqueConstraint('address', 'location_id', 'porchfest_id', name='uniquePorc'),)
+    __table_args__ = (UniqueConstraint('address', 'location_id', 'porchfest_id', name='uniquePorch'),)
 
     def __repr__(self):
         return '<Porch {}>'.format(self.name)
@@ -75,5 +78,5 @@ class ArtistToPorch(db.Model):
     porch_id = db.Column(db.Integer, db.ForeignKey('porch.id'))
     start_time = db.Column(db.DateTime, default=datetime.utcnow)
     end_time = db.Column(db.DateTime, default=datetime.utcnow)
-    artist = db.relationship('Artist', backref='artist', lazy='dynamic')
-    porch = db.relationship('Porch', backref='porch', lazy='dynamic')
+    artist = db.relationship('Artist', backref='artist')
+    porch = db.relationship('Porch', backref='porch')
