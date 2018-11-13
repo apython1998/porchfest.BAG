@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="app.db">
+  <database-model serializer="dbm" rdbms="SQLITE" format-version="4.11">
+    <root id="1">
+      <ServerVersion>3.25.1</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="main">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <collation id="3" parent="1" name="BINARY"/>
+    <collation id="4" parent="1" name="NOCASE"/>
+    <collation id="5" parent="1" name="RTRIM"/>
+    <table id="6" parent="2" name="alembic_version"/>
+    <table id="7" parent="2" name="artist"/>
+    <table id="8" parent="2" name="artist_to_porch"/>
+    <table id="9" parent="2" name="location"/>
+    <table id="10" parent="2" name="porch"/>
+    <table id="11" parent="2" name="porchfest"/>
+    <table id="12" parent="2" name="sqlite_master">
+      <System>1</System>
+    </table>
+    <column id="13" parent="6" name="version_num">
+      <Position>1</Position>
+      <DataType>VARCHAR(32)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="14" parent="6" name="sqlite_autoindex_alembic_version_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>version_num</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="15" parent="6" name="alembic_version_pkc">
+      <ColNames>version_num</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_alembic_version_1</UnderlyingIndexName>
+    </key>
+    <column id="16" parent="7" name="id">
+      <Position>1</Position>
+      <DataType>INTEGER|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="17" parent="7" name="email">
+      <Position>2</Position>
+      <DataType>VARCHAR(256)|0s</DataType>
+    </column>
+    <column id="18" parent="7" name="password_hash">
+      <Position>3</Position>
+      <DataType>VARCHAR(128)|0s</DataType>
+    </column>
+    <column id="19" parent="7" name="name">
+      <Position>4</Position>
+      <DataType>VARCHAR(128)|0s</DataType>
+    </column>
+    <column id="20" parent="7" name="location_id">
+      <Position>5</Position>
+      <DataType>INTEGER|0s</DataType>
+    </column>
+    <column id="21" parent="7" name="description">
+      <Position>6</Position>
+      <DataType>VARCHAR(256)|0s</DataType>
+    </column>
+    <column id="22" parent="7" name="spotify_url">
+      <Position>7</Position>
+      <DataType>VARCHAR(256)|0s</DataType>
+    </column>
+    <column id="23" parent="7" name="youtube_url">
+      <Position>8</Position>
+      <DataType>VARCHAR(256)|0s</DataType>
+    </column>
+    <column id="24" parent="7" name="facebook_url">
+      <Position>9</Position>
+      <DataType>VARCHAR(256)|0s</DataType>
+    </column>
+    <index id="25" parent="7" name="ix_artist_name">
+      <ColNames>name</ColNames>
+      <ColumnCollations></ColumnCollations>
+    </index>
+    <index id="26" parent="7" name="ix_artist_description">
+      <ColNames>description</ColNames>
+      <ColumnCollations></ColumnCollations>
+    </index>
+    <key id="27" parent="7">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="28" parent="7">
+      <ColNames>location_id</ColNames>
+      <RefTableName>location</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="29" parent="8" name="id">
+      <Position>1</Position>
+      <DataType>INTEGER|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="30" parent="8" name="artist_id">
+      <Position>2</Position>
+      <DataType>INTEGER|0s</DataType>
+    </column>
+    <column id="31" parent="8" name="porch_id">
+      <Position>3</Position>
+      <DataType>INTEGER|0s</DataType>
+    </column>
+    <column id="32" parent="8" name="start_time">
+      <Position>4</Position>
+      <DataType>DATETIME|0s</DataType>
+    </column>
+    <column id="33" parent="8" name="end_time">
+      <Position>5</Position>
+      <DataType>DATETIME|0s</DataType>
+    </column>
+    <key id="34" parent="8">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="35" parent="8">
+      <ColNames>artist_id</ColNames>
+      <RefTableName>artist</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="36" parent="8">
+      <ColNames>porch_id</ColNames>
+      <RefTableName>porch</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="37" parent="9" name="id">
+      <Position>1</Position>
+      <DataType>INTEGER|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="38" parent="9" name="city">
+      <Position>2</Position>
+      <DataType>VARCHAR(256)|0s</DataType>
+    </column>
+    <column id="39" parent="9" name="state">
+      <Position>3</Position>
+      <DataType>VARCHAR(64)|0s</DataType>
+    </column>
+    <column id="40" parent="9" name="zip_code">
+      <Position>4</Position>
+      <DataType>INTEGER|0s</DataType>
+    </column>
+    <index id="41" parent="9" name="sqlite_autoindex_location_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>city
+state</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <index id="42" parent="9" name="ix_location_city">
+      <ColNames>city</ColNames>
+      <ColumnCollations></ColumnCollations>
+    </index>
+    <index id="43" parent="9" name="ix_location_state">
+      <ColNames>state</ColNames>
+      <ColumnCollations></ColumnCollations>
+    </index>
+    <index id="44" parent="9" name="ix_location_zip_code">
+      <ColNames>zip_code</ColNames>
+      <ColumnCollations></ColumnCollations>
+    </index>
+    <key id="45" parent="9">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="46" parent="9" name="uniqueLocation">
+      <ColNames>city
+state</ColNames>
+      <UnderlyingIndexName>sqlite_autoindex_location_1</UnderlyingIndexName>
+    </key>
+    <column id="47" parent="10" name="id">
+      <Position>1</Position>
+      <DataType>INTEGER|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="48" parent="10" name="name">
+      <Position>2</Position>
+      <DataType>VARCHAR(256)|0s</DataType>
+    </column>
+    <column id="49" parent="10" name="email">
+      <Position>3</Position>
+      <DataType>VARCHAR(256)|0s</DataType>
+    </column>
+    <column id="50" parent="10" name="address">
+      <Position>4</Position>
+      <DataType>VARCHAR(256)|0s</DataType>
+    </column>
+    <column id="51" parent="10" name="location_id">
+      <Position>5</Position>
+      <DataType>INTEGER|0s</DataType>
+    </column>
+    <column id="52" parent="10" name="porchfest_id">
+      <Position>6</Position>
+      <DataType>INTEGER|0s</DataType>
+    </column>
+    <column id="53" parent="10" name="time_available_start">
+      <Position>7</Position>
+      <DataType>DATETIME|0s</DataType>
+    </column>
+    <column id="54" parent="10" name="time_available_end">
+      <Position>8</Position>
+      <DataType>DATETIME|0s</DataType>
+    </column>
+    <key id="55" parent="10">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="56" parent="10">
+      <ColNames>location_id</ColNames>
+      <RefTableName>location</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="57" parent="10">
+      <ColNames>porchfest_id</ColNames>
+      <RefTableName>porchfest</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="58" parent="11" name="id">
+      <Position>1</Position>
+      <DataType>INTEGER|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="11" name="location_id">
+      <Position>2</Position>
+      <DataType>INTEGER|0s</DataType>
+    </column>
+    <column id="60" parent="11" name="start_time">
+      <Position>3</Position>
+      <DataType>DATETIME|0s</DataType>
+    </column>
+    <column id="61" parent="11" name="end_time">
+      <Position>4</Position>
+      <DataType>DATETIME|0s</DataType>
+    </column>
+    <key id="62" parent="11">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="63" parent="11">
+      <ColNames>location_id</ColNames>
+      <RefTableName>location</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="64" parent="12" name="type">
+      <Position>1</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="65" parent="12" name="name">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="66" parent="12" name="tbl_name">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="67" parent="12" name="rootpage">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="68" parent="12" name="sql">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+    </column>
+  </database-model>
+</dataSource>
