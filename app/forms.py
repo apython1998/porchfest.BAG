@@ -68,6 +68,16 @@ class PorchForm(FlaskForm):
     endTime = DateTimeField('End time available', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
+    def validate_zip(self, zip):
+        for c in zip.data:
+            if c.isalpha():
+                raise ValidationError('Zip code must consist of only integers')
+
+    def validate_time(self, startTime, endTime):
+        if endTime.data < startTime.data:
+            raise ValidationError('End time must be after start time')
+        # get the start and end time for the porchfest and make sure entered times are between those
+
 
 class ArtistPorchfestSignUpForm(FlaskForm):
     porchfest = SelectField('Choose a porchfest', validators=[DataRequired()], coerce=int)
@@ -78,7 +88,13 @@ class ArtistPorchfestSignUpForm(FlaskForm):
     address = StringField('Address', validators=[DataRequired()])
     city = StringField('City', validators=[DataRequired()])
     state = StringField('State', validators=[length(min=2, max=2, message="Length should be two letters!")])
+    zip = StringField('Zip code', validators=[length(min=5, max=5, message="Should be 5 numbers long!")])
     submit = SubmitField('Submit')
+
+    def validate_zip(self, zip):
+        for c in zip.data:
+            if c.isalpha():
+                raise ValidationError('Zip code must consist of only integers')
 
 
 class LoginForm(FlaskForm):
