@@ -57,6 +57,7 @@ def reset_db():
         show.save(cascade=True)
     default_porchfests = [
         Porchfest(location=Location.objects(city='Ithaca', state='NY').first(), start_time=times[0], end_time=times[1],
+                  porches=[Porch.objects(name='Ithaca Porch 1').first(), Porch.objects(name='Ithaca Porch 2').first()],
                   shows=[Show.objects(artist=Artist.objects(name='Artist 1').first()).first()]),
         Porchfest(location=Location.objects(city='Binghamton', state='NY').first(), start_time=times[0], end_time=times[1]),
         Porchfest(location=Location.objects(city='Albany', state='NY').first(), start_time=times[0], end_time=times[1])

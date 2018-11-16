@@ -57,6 +57,7 @@ class Porchfest(db.Document):
     location = db.ReferenceField(Location)
     start_time = db.DateTimeField(default=datetime.utcnow)
     end_time = db.DateTimeField()
+    porches = db.ListField(db.ReferenceField(Porch, reverse_delete_rule=db.CASCADE))
     shows = db.ListField(db.ReferenceField(Show, reverse_delete_rule=db.CASCADE))
 
     def __repr__(self):
