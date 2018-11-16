@@ -1,0 +1,45 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+     Porchfest.BAG
+ {% endblock %}
+
+ {%  block navbar %}
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collaps-1" aria-expanded="false">
+                    <span class="sr-only"> Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                <button>
+                    <a class="navbar-brand" href="{{ url_for('index') }}">Porchfest!</a>
+            </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ url_for('logIn') }}">Login</a></li>
+                    <li><a href="{{ url_for('signUp') }}">Artist Sign Ups</a></li>
+                    <li><a href="{{ url_for('findaporchfest') }}">Find a Porchfest</a></li>
+                {%  endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+ {% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-info" role="alert">{{ message }}</div>
+                {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {# applicatin contnt needs to be provided in the app_content block #}
+        {% block app_content %}{% endblock %}
+     </div>
+     {% endblock %}
