@@ -2,6 +2,7 @@ from flask import render_template, url_for, redirect, flash, request
 from app import app, db
 from app.models import Artist, Porch, Porchfest, ArtistToPorch, Location
 from datetime import datetime
+from app.forms import NewArtistForm, RegistrationForm, LoginForm, PorchForm, ArtistPorchfestSignUpForm
 
 
 @app.route('/reset_db')
