@@ -5,6 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index.html" afterDir="false" />
     </list>
     <ignored path="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/porchfest_BAG$porchfest_BAG.coverage" NAME="porchfest_BAG Coverage Results" MODIFIED="1542298783750" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/porchfest_BAG$porchfest_BAG.coverage" NAME="porchfest_BAG Coverage Results" MODIFIED="1542489148975" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -44,13 +46,14 @@
     <session id="1891878294">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
-          <entry key="project.open.time.12" value="2" />
+          <entry key="project.closed" value="9" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.12" value="3" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="2" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -59,33 +62,33 @@
           <entry key="SCHEMA:main" value="1" />
           <entry key="databaseDiagram" value="1" />
           <entry key="gitignore" value="4" />
-          <entry key="html" value="1" />
+          <entry key="html" value="4" />
           <entry key="location" value="9" />
           <entry key="md" value="1" />
           <entry key="png" value="1" />
           <entry key="porch" value="3" />
-          <entry key="py" value="44" />
+          <entry key="py" value="45" />
           <entry key="sql" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Database Element" value="12" />
-          <entry key="HTML" value="1" />
+          <entry key="HTML" value="4" />
           <entry key="Image" value="1" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="44" />
+          <entry key="Python" value="45" />
           <entry key="Scratch" value="8" />
           <entry key="UML" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="16" />
+          <entry key="HTML" value="44" />
           <entry key="Markdown" value="138" />
           <entry key="PLAIN_TEXT" value="29" />
-          <entry key="Python" value="9285" />
+          <entry key="Python" value="9613" />
           <entry key="Scratch" value="482" />
         </counts>
       </usages-collector>
@@ -93,29 +96,30 @@
       <usages-collector id="statistics.vcs.git.usages">
         <counts>
           <entry key="git.branch.checkout.remote" value="1" />
+          <entry key="git.branch.merge" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="28" />
           <entry key="gitignore" value="1" />
-          <entry key="html" value="16" />
+          <entry key="html" value="44" />
           <entry key="md" value="138" />
-          <entry key="py" value="9285" />
+          <entry key="py" value="9613" />
           <entry key="sql" value="482" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.39631337">
+    <splitter split-orientation="horizontal" split-proportion="0.47425058">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/routes.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="43">
-                  <caret line="7" selection-start-line="7" selection-end-line="7" />
+                <state relative-caret-position="678">
+                  <caret line="68" selection-start-line="68" selection-end-line="68" />
                 </state>
               </provider>
             </entry>
@@ -139,8 +143,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/models.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="618">
-                  <caret line="59" column="82" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="82" />
+                <state relative-caret-position="363">
+                  <caret line="62" column="59" selection-start-line="62" selection-start-column="59" selection-end-line="62" selection-end-column="59" />
                   <folding>
                     <element signature="e#0#29#0" expanded="true" />
                   </folding>
@@ -192,13 +196,14 @@
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/dc8d4950-04fb-4253-9aa2-665d90f4e40e/console.sql" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/aaa3c470-c7fa-40e0-bb51-9eef67fd72dd/console.sql" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/b476d7ea-9815-4dfd-b9cd-b796cd59a834/console.sql" />
-        <option value="$PROJECT_DIR$/app/templates/index.html" />
         <option value="$PROJECT_DIR$/app/models_sql.py" />
         <option value="$PROJECT_DIR$/app/__init__.py" />
         <option value="$PROJECT_DIR$/porchfest_BAG.py" />
         <option value="$PROJECT_DIR$/config.py" />
-        <option value="$PROJECT_DIR$/app/routes.py" />
         <option value="$PROJECT_DIR$/app/models.py" />
+        <option value="$PROJECT_DIR$/app/routes.py" />
+        <option value="$PROJECT_DIR$/app/templates/base.html" />
+        <option value="$PROJECT_DIR$/app/templates/index.html" />
       </list>
     </option>
   </component>
@@ -229,6 +234,12 @@
               <item name="porchfest_BAG" type="b2602c69:ProjectViewProjectNode" />
               <item name="porchfest_BAG" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="porchfest_BAG" type="b2602c69:ProjectViewProjectNode" />
+              <item name="porchfest_BAG" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -295,9 +306,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.06866953" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.07010014" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -363,8 +373,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app/routes.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="7" />
+          <line>68</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/routes.py</url>
+          <line>30</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -444,13 +459,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="das://b476d7ea-9815-4dfd-b9cd-b796cd59a834/schema/main/table/porch" />
-    <entry file="file://$PROJECT_DIR$/app/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://b476d7ea-9815-4dfd-b9cd-b796cd59a834/schema/main/table/location" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/8b3d315e-6ee5-4f55-a070-0e05aabd7d6a/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
@@ -512,13 +520,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models_sql.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="775">
-          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.7/site-packages/mongoengine/base/fields.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
@@ -546,20 +547,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.py">
+    <entry file="file://$PROJECT_DIR$/app/models_sql.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="720">
+          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="618">
-          <caret line="59" column="82" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="82" />
+        <state relative-caret-position="363">
+          <caret line="62" column="59" selection-start-line="62" selection-start-column="59" selection-end-line="62" selection-end-column="59" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/findaporchfest.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="678">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
         </state>
       </provider>
     </entry>

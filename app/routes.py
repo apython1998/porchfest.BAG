@@ -14,6 +14,8 @@ def reset_db():
         porch.delete()
     for fest in Porchfest.objects:
         fest.delete()
+    for show in Show.objects:
+        show.delete()
     times = [
         datetime(2018, 9, 26, 9, 0, 0),  # start for porchfests
         datetime(2018, 9, 26, 17, 0, 0),  # end for porchfests
