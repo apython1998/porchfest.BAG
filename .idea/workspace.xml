@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="255e2239-fc57-403c-9063-f370492b9b92" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
     </list>
     <ignored path="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -12,8 +13,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/porchfest_BAG$porchfest_BAG.coverage" NAME="porchfest_BAG Coverage Results" MODIFIED="1542151766607" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/porchfest_BAG$forms.coverage" NAME="forms Coverage Results" MODIFIED="1542220269575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/porchfest_BAG$porchfest_BAG.coverage" NAME="porchfest_BAG Coverage Results" MODIFIED="1543283839265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/porchfest_BAG$forms.coverage" NAME="forms Coverage Results" MODIFIED="1543283489225" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -108,29 +109,34 @@
     <session id="-1109722644">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="html" value="6" />
           <entry key="py" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="HTML" value="6" />
           <entry key="Python" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="2870" />
+          <entry key="html" value="2" />
+          <entry key="py" value="3265" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="2870" />
+          <entry key="HTML" value="2" />
+          <entry key="Python" value="3265" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="1" />
+          <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -139,34 +145,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
-              <caret line="56" selection-start-line="56" selection-end-line="56" />
+            <state relative-caret-position="128">
+              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
+                <marker date="1543283813690" expanded="true" signature="2983:3027" ph="..." />
+                <marker date="1543283813690" expanded="true" signature="3066:3071" ph="..." />
+                <marker date="1543283813690" expanded="true" signature="3365:3370" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models.py">
+        <entry file="file://$PROJECT_DIR$/app/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1377">
-              <caret line="88" selection-start-line="88" selection-end-line="88" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="85">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
+            <state relative-caret-position="306">
               <caret line="78" column="100" selection-start-line="78" selection-start-column="100" selection-end-line="78" selection-end-column="100" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
@@ -207,9 +222,10 @@
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/aaa3c470-c7fa-40e0-bb51-9eef67fd72dd/console.sql" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/b476d7ea-9815-4dfd-b9cd-b796cd59a834/console.sql" />
         <option value="$PROJECT_DIR$/app/templates/index.html" />
-        <option value="$PROJECT_DIR$/app/routes.py" />
         <option value="$PROJECT_DIR$/app/models.py" />
         <option value="$PROJECT_DIR$/app/forms.py" />
+        <option value="$PROJECT_DIR$/app/templates/base.html" />
+        <option value="$PROJECT_DIR$/app/routes.py" />
       </list>
     </option>
   </component>
@@ -220,9 +236,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="908" />
-    <option name="y" value="6" />
-    <option name="width" value="1019" />
+    <option name="x" value="907" />
+    <option name="y" value="5" />
+    <option name="width" value="1020" />
     <option name="height" value="1015" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -243,6 +259,12 @@
               <item name="porchfest_BAG" type="b2602c69:ProjectViewProjectNode" />
               <item name="porchfest_BAG" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="porchfest_BAG" type="b2602c69:ProjectViewProjectNode" />
+              <item name="porchfest_BAG" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -276,7 +298,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.forms">
+  <component name="RunManager" selected="Flask server.porchfest_BAG">
     <configuration name="forms" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="porchfest_BAG" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -338,16 +360,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="727" y="5" width="815" height="812" extended-state="0" />
+    <frame x="726" y="4" width="816" height="812" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.07152318" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27248678" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32891566" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.23122239" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.30927834" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.23122239" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -377,7 +399,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app/routes.py</url>
-          <line>56</line>
+          <line>57</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
@@ -440,13 +462,6 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/aaa3c470-c7fa-40e0-bb51-9eef67fd72dd/console.sql" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/b476d7ea-9815-4dfd-b9cd-b796cd59a834/console.sql" />
     <entry file="das://b476d7ea-9815-4dfd-b9cd-b796cd59a834/schema/main/table/porch" />
-    <entry file="file://$PROJECT_DIR$/app/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://b476d7ea-9815-4dfd-b9cd-b796cd59a834/schema/main/table/location" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/8b3d315e-6ee5-4f55-a070-0e05aabd7d6a/console.sql" />
     <entry file="das://8b3d315e-6ee5-4f55-a070-0e05aabd7d6a/schema/main/table/location">
@@ -507,19 +522,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1377">
+        <state relative-caret-position="623">
           <caret line="88" selection-start-line="88" selection-end-line="88" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
@@ -527,9 +532,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/signUp.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/artistToPorch.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/artist.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
+        <state relative-caret-position="306">
           <caret line="78" column="100" selection-start-line="78" selection-start-column="100" selection-end-line="78" selection-end-column="100" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
@@ -538,6 +552,33 @@
             <marker date="1542315371782" expanded="true" signature="2655:2660" ph="..." />
             <marker date="1542315371782" expanded="true" signature="4192:4197" ph="..." />
             <marker date="1542315371782" expanded="true" signature="5104:5109" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+          <folding>
+            <element signature="e#0#68#0" expanded="true" />
+            <marker date="1543283813690" expanded="true" signature="2983:3027" ph="..." />
+            <marker date="1543283813690" expanded="true" signature="3066:3071" ph="..." />
+            <marker date="1543283813690" expanded="true" signature="3365:3370" ph="..." />
           </folding>
         </state>
       </provider>
