@@ -2,6 +2,8 @@ from flask import render_template, url_for, redirect, flash, request
 from app import app
 from app.models import Artist, Porch, Porchfest, Show, Location
 from datetime import datetime
+from flask_login import login_user, current_user, logout_user, login_required
+from app.forms import NewArtistForm, RegistrationForm, LoginForm, PorchForm, ArtistPorchfestSignUpForm
 
 
 @app.route('/reset_db')
@@ -67,3 +69,38 @@ def reset_db():
     for porchfest in default_porchfests:
         porchfest.save(cascade=True)
     return render_template('index.html')
+
+
+@app.route('/')
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/find_a_porchfest')
+def findaporchfest():
+    return render_template('findaporchfest.html')
+
+
+@app.route('/register')
+def signUp():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        # make new user
+        return redirect(url_for('index'))
+    return render_template('signUp.html', form=form)
+
+
+@app.route('/login')
+def logIn():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        #login
+        return redirect(url_for('index'))
+    return render_template('login.html', form=form)
+
+

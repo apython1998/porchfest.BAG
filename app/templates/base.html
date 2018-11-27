@@ -14,13 +14,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                    <a class="navbar-brand" href="#">Porchfest!</a>
+                    <a class="navbar-brand" href="{{ url_for('index') }}">Porchfest!</a>
             </div>
-            <div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Artist Sign Ups</a></li>
-                    <li><a href="#">Find a Porchfest</a></li>
+                    <li><a href="{{ url_for('logIn') }}">Login</a></li>
+                    <li><a href="{{ url_for('signUp') }}">Artist Sign Ups</a></li>
+                    <li><a href="{{ url_for('findaporchfest') }}">Find a Porchfest</a></li>
 
                 </ul>
             </div>
@@ -40,7 +39,7 @@
             {% endif %}
         {% endwith %}
 
-        {# application contnt needs to be provided in the app_content block #}
+        {# applicatin contnt needs to be provided in the app_content block #}
         {% block app_content %}{% endblock %}
      </div>
- {% endblock %}
+{% endblock %}
