@@ -24,6 +24,9 @@ class RegistrationForm(FlaskForm):
 
 class NewArtistForm(FlaskForm):
     bandName = StringField('Band Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    password_check = PasswordField('Reenter Password', validators=[DataRequired(), EqualTo('password')])
     genre = StringField('Genre', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
     city = StringField('City', validators=[DataRequired()])
@@ -50,6 +53,11 @@ class NewArtistForm(FlaskForm):
     def validate_facebook(self, facebook):
         if "facebook" not in facebook.data:
             raise ValidationError('Please enter a url for Facebook')
+
+    def validate_email(self, email):
+        artist = Artist.query.filter_by(email=email.data).first()
+        if artist is not None:
+            raise ValidationError('Email already being used!')
 
 
 class PorchForm(FlaskForm):

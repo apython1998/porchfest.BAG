@@ -69,6 +69,7 @@ def index():
 
 @app.route('/find_a_porchfest')
 def findaporchfest():
+    # do some stuff
     return render_template('findaporchfest.html')
 
 
@@ -76,7 +77,7 @@ def findaporchfest():
 def signUp():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    form = RegistrationForm()
+    form = NewArtistForm()
     if form.validate_on_submit():
         # make new user
         return redirect(url_for('index'))
@@ -89,8 +90,18 @@ def logIn():
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
-        #login
+        # login
+
         return redirect(url_for('index'))
     return render_template('login.html', form=form)
 
 
+@app.route('/new_porch')
+def addPorch():
+    form = PorchForm()
+    # need to populate select fields!
+    if form.validate_on_submit():
+        # add porch to db
+
+        return redirect(url_for('index'))
+    return render_template('addPorch.html', form=form)
