@@ -67,6 +67,11 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/find_a_porchfest')
+def findaporchfest():
+    return render_template('findaporchfest.html')
+
+
 @app.route('/register')
 def signUp():
     if current_user.is_authenticated:
