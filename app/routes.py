@@ -3,7 +3,7 @@ from app import app
 from app.models import Artist, Porch, Porchfest, Show, Location
 from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required
-from app.forms import NewArtistForm, RegistrationForm, LoginForm, PorchForm, ArtistPorchfestSignUpForm
+from app.forms import NewArtistForm, LoginForm, PorchForm, ArtistPorchfestSignUpForm
 
 
 @app.route('/reset_db')
@@ -89,7 +89,19 @@ def signUp():
         return redirect(url_for('index'))
     form = NewArtistForm()
     if form.validate_on_submit():
-        # make new user
+        # make new artist
+        location = Location.objects(city=form.city.data, state=form.state.data).first()
+        if location is None:
+            location = Location(city=form.city.data, state=form.state.data, zip_code=form.zip.data)
+        mediaLinks = []
+        if form.facebook.data is not None:
+            mediaLinks.append(form.facebook.data)
+        if form.youtube.data is not None:
+            mediaLinks.append(form.youtube.data)
+        if form.spotify.data is not None:
+            mediaLinks.append(form.spotify.data)
+        newArtist = Artist(email=form.email.data, name=form.bandName.data, description=form.description.data, media_links=mediaLinks, location=location)
+        newArtist.save(cascade=True)
         return redirect(url_for('index'))
     return render_template('signUp.html', form=form)
 
