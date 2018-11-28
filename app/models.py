@@ -36,6 +36,11 @@ class Artist(UserMixin, db.Document):
         return check_password_hash(self.password_hash, password)
 
 
+@login.user_loader
+def load_user(id):
+    return Artist.objects(id=id).first()
+
+
 class Porch(db.Document):
     name = db.StringField()
     email = db.StringField(unique=True)

@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 db = MongoEngine(app)
 login = LoginManager(app)
-login.login_view = 'logIn'
+login.login_view = 'login'
 bootstrap = Bootstrap(app)
 
 from app import routes, models

@@ -84,7 +84,7 @@ def findaporchfest():
     # do some stuff
     return render_template('findaporchfest.html')
 
-# not working
+
 @app.route('/register', methods=['GET', 'POST'])
 def signUp():
     if current_user.is_authenticated:
@@ -108,19 +108,20 @@ def signUp():
         return redirect(url_for('index'))  # probably want to send to artist page once that exists
     return render_template('signUp.html', form=form)
 
-# not working
+
 @app.route('/login', methods=['GET', 'POST'])
 def logIn():
     if current_user.is_authenticated:
+        #  flash("You are logged in!")
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
-        # login
         user = Artist.objects(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('logIn'))
         login_user(user, remember=form.remember_me.data)
+        flash('Login successful')
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).necloc != '':
             next_page = url_for('index')  # maybe change this to artist's page
