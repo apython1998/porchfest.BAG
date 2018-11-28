@@ -17,14 +17,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                <button>
+                </button>
                     <a class="navbar-brand" href="{{ url_for('index') }}">Porchfest!</a>
             </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ url_for('logIn') }}">Login</a></li>
                     <li><a href="{{ url_for('signUp') }}">Artist Sign Ups</a></li>
                     <li><a href="{{ url_for('findaporchfest') }}">Find a Porchfest</a></li>
-                {%  endif %}
+
                 </ul>
             </div>
         </div>
@@ -40,7 +40,7 @@
                 {% for message in messages %}
                 <div class="alert alert-info" role="alert">{{ message }}</div>
                 {% endfor %}
-        {% endif %}
+            {% endif %}
         {% endwith %}
 
         {# applicatin contnt needs to be provided in the app_content block #}
