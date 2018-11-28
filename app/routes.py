@@ -1,9 +1,9 @@
-from flask import render_template, url_for, redirect, flash, request
+from flask import render_template, url_for, redirect, flash, request, jsonify
 from app import app
 from app.models import Artist, Porch, Porchfest, Show, Location
 from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required
-from app.forms import NewArtistForm, RegistrationForm, LoginForm, PorchForm, ArtistPorchfestSignUpForm
+from app.forms import NewArtistForm, RegistrationForm, LoginForm, PorchForm, ArtistPorchfestSignUpForm, FindAPorchfestForm
 
 
 @app.route('/reset_db')
@@ -68,6 +68,7 @@ def reset_db():
     ]
     for porchfest in default_porchfests:
         porchfest.save(cascade=True)
+    flash("Database has been reset!")
     return render_template('index.html')
 
 
@@ -79,7 +80,21 @@ def index():
 
 @app.route('/find_a_porchfest')
 def findaporchfest():
-    return render_template('findaporchfest.html')
+    form = FindAPorchfestForm()
+    form.porchfest.choices = [("", "---")] + [(p.id, p.location.city + ', ' + p.location.state) for p in Porchfest.objects()]
+    return render_template('findaporchfest.html', form=form)
+
+
+@app.route('/_artists_for_porchfest')
+def artists_for_porchfest():
+    porchfest_id = request.args.get('porchfestID', '')
+    porchfest = Porchfest.objects.get(id=porchfest_id)
+    porchfest_artists = []
+    for show in porchfest.shows:
+        artist_name = show.artist.name
+        if artist_name not in porchfest_artists:
+            porchfest_artists.append(artist_name)
+    return jsonify(porchfest_artists)
 
 
 @app.route('/register')

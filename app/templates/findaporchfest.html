@@ -1,1 +1,33 @@
 {% extends "base.html" %}
+
+{% block app_content %}
+    <div class="col-xs-4 col-xs-offset-4" id="selectAPorchfest">
+        {{ form.porchfest.label() }} <br>
+        {{ form.porchfest() }}
+    </div>
+    <div class="col-xs-4 col-xs-offset-4" id="map">
+        <p>MAP GOES HERE</p>
+    </div>
+    <div class="col-xs-4 col-xs-offset-4" id="artistList">
+        <p>LIST OF ARTISTS GOES HERE</p>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    $("#selectAPorchfest").on('change', function() {
+        var porchfestID = $('#select_porchfest option:selected').val();
+        console.log(porchfestID);
+        $.ajax({
+            url: '/_artists_for_porchfest?porchfestID=' + porchfestID,
+            type: 'GET',
+            success: function(artists){
+                $("#artistList").empty();
+                artists.forEach(function(artist) {
+                    console.log(artist);
+                })
+            }
+        });
+    });
+    </script>
+{% endblock %}
