@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, PasswordField, BooleanField, SelectField, SelectMultipleField
 from wtforms.fields.html5 import DateTimeField, DateField
-from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, length, URL
+from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, length, URL, Optional
 from app.models import Artist, Location, Porch, Porchfest
 
 
@@ -15,9 +15,9 @@ class NewArtistForm(FlaskForm):
     city = StringField('City', validators=[DataRequired()])
     state = StringField('State', validators=[length(min=2, max=2, message="Length should be two letters!")])
     zip = StringField('Zip code', validators=[length(min=5, max=5, message="Should be 5 numbers long!")])
-    spotify = StringField('Spotify url', validators=[URL()])  # check if link is spotify
-    youtube = StringField('Youtube url', validators=[URL()])  # check if link is youtube
-    facebook = StringField('Facebook url', validators=[URL()])  # check if link is fb
+    spotify = StringField('Spotify url', validators=[Optional()])  # removed url check because was never accepting
+    youtube = StringField('Youtube url', validators=[Optional()])  # removed url check because was never accepting
+    facebook = StringField('Facebook url', validators=[Optional()])  # removed url check because was never accepting
     submit = SubmitField('Register')
 
     def validate_zip(self, zip):

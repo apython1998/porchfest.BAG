@@ -1,4 +1,6 @@
 from flask import render_template, url_for, redirect, flash, request
+from werkzeug.urls import url_parse
+
 from app import app
 from app.models import Artist, Porch, Porchfest, Show, Location
 from datetime import datetime
@@ -82,8 +84,8 @@ def findaporchfest():
     # do some stuff
     return render_template('findaporchfest.html')
 
-
-@app.route('/register')
+# not working
+@app.route('/register', methods=['GET', 'POST'])
 def signUp():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
@@ -101,24 +103,32 @@ def signUp():
         if form.spotify.data is not None:
             mediaLinks.append(form.spotify.data)
         newArtist = Artist(email=form.email.data, name=form.bandName.data, description=form.description.data, media_links=mediaLinks, location=location)
+        newArtist.set_password(form.password.data)
         newArtist.save(cascade=True)
-        return redirect(url_for('index'))
+        return redirect(url_for('index'))  # probably want to send to artist page once that exists
     return render_template('signUp.html', form=form)
 
-
-@app.route('/login')
+# not working
+@app.route('/login', methods=['GET', 'POST'])
 def logIn():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         # login
-
-        return redirect(url_for('index'))
+        user = Artist.objects(email=form.email.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('logIn'))
+        login_user(user, remember=form.remember_me.data)
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).necloc != '':
+            next_page = url_for('index')  # maybe change this to artist's page
+        return redirect(next_page)
     return render_template('login.html', form=form)
 
 
-@app.route('/new_porch')
+@app.route('/new_porch', methods=['GET', 'POST'])
 def addPorch():
     form = PorchForm()
     # need to populate select fields!
