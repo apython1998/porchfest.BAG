@@ -97,6 +97,12 @@ def artists_for_porchfest():
     return jsonify(porchfest_artists)
 
 
+@app.route('/artist/<artist_name>')
+def artist(artist_name):
+    artist = Artist.objects(name=artist_name).first_or_404()
+    return render_template('artist.html', artist=artist)
+
+
 @app.route('/register')
 def signUp():
     if current_user.is_authenticated:
