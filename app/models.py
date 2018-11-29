@@ -23,7 +23,7 @@ class Artist(UserMixin, db.Document):
     password_hash = db.StringField()
     name = db.StringField(unique=True)
     description = db.StringField()
-    media_links = db.ListField(db.URLField())
+    media_links = db.ListField(db.StringField())
     location = db.ReferenceField(Location)
 
     def __repr__(self):

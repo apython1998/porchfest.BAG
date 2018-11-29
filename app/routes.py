@@ -95,17 +95,18 @@ def signUp():
         location = Location.objects(city=form.city.data, state=form.state.data).first()
         if location is None:
             location = Location(city=form.city.data, state=form.state.data, zip_code=form.zip.data)
+            location.save(cascade=True)
         mediaLinks = []
-        if form.facebook.data is not None:
+        if form.facebook.data != "":
             mediaLinks.append(form.facebook.data)
-        if form.youtube.data is not None:
+        if form.youtube.data != "":
             mediaLinks.append(form.youtube.data)
-        if form.spotify.data is not None:
+        if form.spotify.data != "":
             mediaLinks.append(form.spotify.data)
         newArtist = Artist(email=form.email.data, name=form.bandName.data, description=form.description.data, media_links=mediaLinks, location=location)
         newArtist.set_password(form.password.data)
         newArtist.save(cascade=True)
-        return redirect(url_for('index'))  # probably want to send to artist page once that exists
+        return redirect(url_for('logIn'))  # probably want to send to artist page once that exists
     return render_template('signUp.html', form=form)
 
 
