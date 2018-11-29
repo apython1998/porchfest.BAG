@@ -23,12 +23,11 @@
                 type: 'GET',
                 success: function (artists) {
                     $("#artistList").empty();
+                    porchfestText = $('#select_porchfest option:selected').text();
                     if (artists.length === 0) {
-                        porchfestText = $('#select_porchfest option:selected').text();
-                        console.log(porchfestText);
                         artistListElement.innerHTML = "<b>There are no artists for the " + porchfestText + " Porchfest</b>"
                     } else {
-                        tableHTML = "<label>Artists</label>";
+                        tableHTML = "<label>Artists for " + porchfestText + " Porchfest</label>";
                         tableHTML += "<table class='table table-bordered bg-light table-hover'>";
                         artists.forEach(function (artist) {
                             artistURL = {{ url_for('artist', artist_name='') }}
