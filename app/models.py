@@ -23,7 +23,7 @@ class Artist(UserMixin, db.Document):
     password_hash = db.StringField()
     name = db.StringField(unique=True)
     description = db.StringField()
-    media_links = db.ListField(db.URLField())
+    media_links = db.ListField(db.StringField())
     location = db.ReferenceField(Location)
 
     def __repr__(self):
@@ -34,6 +34,11 @@ class Artist(UserMixin, db.Document):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+
+@login.user_loader
+def load_user(id):
+    return Artist.objects(id=id).first()
 
 
 class Porch(db.Document):

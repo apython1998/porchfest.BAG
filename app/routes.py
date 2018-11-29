@@ -1,9 +1,12 @@
+
 from flask import render_template, url_for, redirect, flash, request, jsonify
+from werkzeug.urls import url_parse
 from app import app
 from app.models import Artist, Porch, Porchfest, Show, Location
 from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required
-from app.forms import NewArtistForm, RegistrationForm, LoginForm, PorchForm, ArtistPorchfestSignUpForm, FindAPorchfestForm
+from app.forms import NewArtistForm, LoginForm, PorchForm, ArtistPorchfestSignUpForm, FindAPorchfestForm
+
 
 
 @app.route('/reset_db')
@@ -103,25 +106,57 @@ def artist(artist_name):
     return render_template('artist.html', artist=artist)
 
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def signUp():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    form = RegistrationForm()
+    form = NewArtistForm()
     if form.validate_on_submit():
-        # make new user
-        return redirect(url_for('index'))
+        # make new artist
+        location = Location.objects(city=form.city.data, state=form.state.data).first()
+        if location is None:
+            location = Location(city=form.city.data, state=form.state.data, zip_code=form.zip.data)
+            location.save(cascade=True)
+        mediaLinks = []
+        if form.facebook.data != "":
+            mediaLinks.append(form.facebook.data)
+        if form.youtube.data != "":
+            mediaLinks.append(form.youtube.data)
+        if form.spotify.data != "":
+            mediaLinks.append(form.spotify.data)
+        newArtist = Artist(email=form.email.data, name=form.bandName.data, description=form.description.data, media_links=mediaLinks, location=location)
+        newArtist.set_password(form.password.data)
+        newArtist.save(cascade=True)
+        return redirect(url_for('logIn'))  # probably want to send to artist page once that exists
     return render_template('signUp.html', form=form)
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def logIn():
     if current_user.is_authenticated:
+        #  flash("You are logged in!")
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
-        #login
-        return redirect(url_for('index'))
+        user = Artist.objects(email=form.email.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('logIn'))
+        login_user(user, remember=form.remember_me.data)
+        flash('Login successful')
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).necloc != '':
+            next_page = url_for('index')  # maybe change this to artist's page
+        return redirect(next_page)
     return render_template('login.html', form=form)
 
 
+@app.route('/new_porch', methods=['GET', 'POST'])
+def addPorch():
+    form = PorchForm()
+    # need to populate select fields!
+    if form.validate_on_submit():
+        # add porch to db
+
+        return redirect(url_for('index'))
+    return render_template('addPorch.html', form=form)
