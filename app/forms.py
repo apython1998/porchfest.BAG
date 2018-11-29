@@ -94,3 +94,7 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Login')
+
+
+class FindAPorchfestForm(FlaskForm):
+    porchfest = SelectField('Choose a Porchfest', validators=[DataRequired()], id='select_porchfest')

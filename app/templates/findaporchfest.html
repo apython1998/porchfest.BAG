@@ -1,1 +1,61 @@
 {% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <div class="col-xs-4 col-xs-offset-4" id="selectAPorchfest">
+        {{ wtf.quick_form(form) }}
+    </div>
+    <div class="col-xs-4 col-xs-offset-4" id="map">
+        <b>MAP GOES HERE</b>
+    </div>
+    <div class="col-xs-6 col-xs-offset-3" id="artistList">
+        <b>Select an event to see the artists for a Porchfest</b>
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    var tableHTML, artistURL, porchfestID, porchfestText;
+    var artistListElement = document.getElementById("artistList");
+    function getArtistsForPorchfest(porchfestID) {
+        $.ajax({
+                url: '/_artists_for_porchfest?porchfestID=' + porchfestID,
+                type: 'GET',
+                success: function (artists) {
+                    $("#artistList").empty();
+                    porchfestText = $('#select_porchfest option:selected').text();
+                    if (artists.length === 0) {
+                        artistListElement.innerHTML = "<b>There are no artists for the " + porchfestText + " Porchfest</b>"
+                    } else {
+                        tableHTML = "<label>Artists for " + porchfestText + " Porchfest</label>";
+                        tableHTML += "<table class='table table-bordered bg-light table-hover'>";
+                        artists.forEach(function (artist) {
+                            artistURL = {{ url_for('artist', artist_name='') }}
+                            artistURL += encodeURI(artist);
+                            artistHTML = "<tr><td><b>";
+                            artistHTML += "<a href=" + artistURL + ">" + artist;
+                            artistHTML += "</a></b></td></tr>";
+                            tableHTML += artistHTML;
+                        });
+                        tableHTML += "</table>";
+                        artistListElement.innerHTML = tableHTML;
+                    }
+                }
+            });
+    }
+    $(document).ready(function () {
+        porchfestID = $('#select_porchfest option:selected').val();
+        if (porchfestID !== "") {
+            getArtistsForPorchfest(porchfestID)
+        }
+    });
+    $("#selectAPorchfest").on('change', function () {
+        porchfestID = $('#select_porchfest option:selected').val();
+        if (porchfestID !== "") {
+            getArtistsForPorchfest(porchfestID);
+        } else {
+
+        }
+    });
+    </script>
+{% endblock %}
