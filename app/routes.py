@@ -5,7 +5,7 @@ from app import app
 from app.models import Artist, Porch, Porchfest, Show, Location
 from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required
-from app.forms import NewArtistForm, RegistrationForm, LoginForm, PorchForm, ArtistPorchfestSignUpForm, FindAPorchfestForm
+from app.forms import NewArtistForm, LoginForm, PorchForm, ArtistPorchfestSignUpForm, FindAPorchfestForm
 
 
 
