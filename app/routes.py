@@ -154,9 +154,18 @@ def logIn():
 @app.route('/new_porch', methods=['GET', 'POST'])
 def addPorch():
     form = PorchForm()
-    # need to populate select fields!
+    porchfests = Porchfest.objects()
+    form.porchfest_id.choices = [(p.id, p.location.city) for p in porchfests]
     if form.validate_on_submit():
-        # add porch to db
-
+        flash('Porch added!')
+        location = Location.objects(city=form.city.data, state=form.state.data)
+        if location is None:
+            location = Location(city=form.city.data, state=form.state.data, zip_code=form.zip.data)
+            location.save(cascade=True)
+        newPorch = Porch(name=form.name, email=form.email, address=form.address, location=location, time_available_start=form.startTime, time_available_end=form.endTime)
+        newPorch.save(cascade=True)
+        porchfest = Porchfest.objects(id=form.porchfest_id).first()
+        porchfest.porches.append(newPorch)
+        porchfest.save(cascade=True)
         return redirect(url_for('index'))
     return render_template('addPorch.html', form=form)

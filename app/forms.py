@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
+from idna import unicode
 from wtforms import StringField, TextAreaField, SubmitField, PasswordField, BooleanField, SelectField, SelectMultipleField
-from wtforms.fields.html5 import DateTimeField, DateField
+from wtforms.fields.html5 import DateTimeLocalField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, length, URL, Optional
 from app.models import Artist, Location, Porch, Porchfest
 
@@ -47,7 +48,7 @@ class NewArtistForm(FlaskForm):
 class PorchForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
-    porchfest_id = SelectField('Choose a Porchfest', validators=[DataRequired()], coerce=int)
+    porchfest_id = SelectField('Choose a Porchfest', validators=[DataRequired()], coerce=unicode)
     # can check that location matches with location of selected porchfest
     # maybe validate by checking address exists with map api
     address = StringField('Address', validators=[DataRequired()])
@@ -56,8 +57,8 @@ class PorchForm(FlaskForm):
     # can have validator to check that each character is an integer
     zip = StringField('Zip code', validators=[length(min=5, max=5, message="Should be 5 numbers long!")])
     # can check here for 1) if there is a porchfest in that area 2) if the dates are within
-    startTime = DateTimeField('Start time available', validators=[DataRequired()])
-    endTime = DateTimeField('End time available', validators=[DataRequired()])
+    startTime = DateTimeLocalField('Start time available', format='%Y-%m-%d %H:%M:%S', validators=[DataRequired()])
+    endTime = DateTimeLocalField('End time available', format='%Y-%m-%d %H:%M:%S', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
     def validate_zip(self, zip):
@@ -81,6 +82,7 @@ class ArtistPorchfestSignUpForm(FlaskForm):
     city = StringField('City', validators=[DataRequired()])
     state = StringField('State', validators=[length(min=2, max=2, message="Length should be two letters!")])
     zip = StringField('Zip code', validators=[length(min=5, max=5, message="Should be 5 numbers long!")])
+    # times playing?
     submit = SubmitField('Submit')
 
     def validate_zip(self, zip):
