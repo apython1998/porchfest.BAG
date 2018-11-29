@@ -1,4 +1,3 @@
-
 from flask import render_template, url_for, redirect, flash, request, jsonify
 from werkzeug.urls import url_parse
 from app import app
@@ -6,7 +5,6 @@ from app.models import Artist, Porch, Porchfest, Show, Location
 from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required
 from app.forms import NewArtistForm, LoginForm, PorchForm, ArtistPorchfestSignUpForm, FindAPorchfestForm
-
 
 
 @app.route('/reset_db')
@@ -88,7 +86,7 @@ def findaporchfest():
     return render_template('findaporchfest.html', form=form)
 
 
-@app.route('/_artists_for_porchfest')
+@app.route('/_artists_for_porchfest') # restful lookup for findaporchfest page
 def artists_for_porchfest():
     porchfest_id = request.args.get('porchfestID', '')
     porchfest = Porchfest.objects.get(id=porchfest_id)
@@ -151,9 +149,16 @@ def logIn():
     return render_template('login.html', form=form)
 
 
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+
 @app.route('/new_porch', methods=['GET', 'POST'])
 def addPorch():
     form = PorchForm()
+    form.porchfest_id.choices = []
     # need to populate select fields!
     if form.validate_on_submit():
         # add porch to db
