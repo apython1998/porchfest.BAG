@@ -1,6 +1,5 @@
 from flask_wtf import FlaskForm
-from idna import unicode
-from wtforms import StringField, TextAreaField, SubmitField, PasswordField, BooleanField, SelectField, SelectMultipleField
+from wtforms import StringField, TextAreaField, SubmitField, PasswordField, BooleanField, SelectField
 from wtforms.fields.html5 import DateTimeLocalField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, length, URL, Optional
 from app.models import Artist, Location, Porch, Porchfest
@@ -48,17 +47,14 @@ class NewArtistForm(FlaskForm):
 class PorchForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
-    porchfest_id = SelectField('Choose a Porchfest', validators=[DataRequired()], coerce=unicode)
-    # can check that location matches with location of selected porchfest
+    porchfest_id = SelectField('Choose a Porchfest', validators=[DataRequired()])
     # maybe validate by checking address exists with map api
     address = StringField('Address', validators=[DataRequired()])
     city = StringField('City', validators=[DataRequired()])
     state = StringField('State', validators=[length(min=2, max=2, message="Length should be two letters!")])
-    # can have validator to check that each character is an integer
     zip = StringField('Zip code', validators=[length(min=5, max=5, message="Should be 5 numbers long!")])
-    # can check here for 1) if there is a porchfest in that area 2) if the dates are within
-    startTime = DateTimeLocalField('Start time available', format='%Y-%m-%d %H:%M:%S', validators=[DataRequired()])
-    endTime = DateTimeLocalField('End time available', format='%Y-%m-%d %H:%M:%S', validators=[DataRequired()])
+    startTime = DateTimeLocalField('Start time available', format='%Y-%m-%dT%H:%M', validators=[])
+    endTime = DateTimeLocalField('End time available', format='%Y-%m-%dT%H:%M', validators=[])
     submit = SubmitField('Submit')
 
     def validate_zip(self, zip):
@@ -66,10 +62,21 @@ class PorchForm(FlaskForm):
             if c.isalpha():
                 raise ValidationError('Zip code must consist of only integers')
 
-    def validate_time(self, startTime, endTime):
+    def validate_location(self, porchfest_id, city, state, zip):
+        fest = Porchfest.objects(id=porchfest_id).first()
+        festLocation = fest.location
+        if festLocation.city != city.data or festLocation.state != state.data or festLocation.zip_code != zip.data:
+            raise ValidationError('Location does not match the location of the selected Porchfest!')
+
+    def validate_time(self, startTime, endTime, porchfest_id):
         if endTime.data < startTime.data:
             raise ValidationError('End time must be after start time')
-        # get the start and end time for the porchfest and make sure entered times are between those
+        fest = Porchfest.objects(id=porchfest_id).first()
+        if endTime.data < fest.start_time or endTime.data > fest.end_time:
+            raise ValidationError('Times must be during Porchfest times')
+        if startTime.data < fest.start_time or startTime.data > fest.end_time:
+            raise ValidationError('Times must be during Porchfest times')
+
 
 
 class ArtistPorchfestSignUpForm(FlaskForm):

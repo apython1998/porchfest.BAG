@@ -155,16 +155,16 @@ def logIn():
 def addPorch():
     form = PorchForm()
     porchfests = Porchfest.objects()
-    form.porchfest_id.choices = [(p.id, p.location.city) for p in porchfests]
+    form.porchfest_id.choices = [(p.location.zip_code, p.location.city+", "+p.location.state) for p in porchfests]
     if form.validate_on_submit():
         flash('Porch added!')
-        location = Location.objects(city=form.city.data, state=form.state.data)
+        location = Location.objects(city=form.city.data, state=form.state.data).first()
         if location is None:
             location = Location(city=form.city.data, state=form.state.data, zip_code=form.zip.data)
             location.save(cascade=True)
-        newPorch = Porch(name=form.name, email=form.email, address=form.address, location=location, time_available_start=form.startTime, time_available_end=form.endTime)
+        newPorch = Porch(name=form.name.data, email=form.email.data, address=form.address.data, location=location.id, time_available_start=form.startTime.data, time_available_end=form.endTime.data)
         newPorch.save(cascade=True)
-        porchfest = Porchfest.objects(id=form.porchfest_id).first()
+        porchfest = Porchfest.objects(location=location.id).first()
         porchfest.porches.append(newPorch)
         porchfest.save(cascade=True)
         return redirect(url_for('index'))
