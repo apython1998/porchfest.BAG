@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_login import current_user
 from wtforms import StringField, TextAreaField, SubmitField, PasswordField, BooleanField, SelectField, SelectMultipleField
 from wtforms.fields.html5 import DateTimeField, DateField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, length, URL, Optional
@@ -41,6 +42,18 @@ class NewArtistForm(FlaskForm):
     def validate_email(self, email):
         artist = Artist.objects(email=email.data).first()
         if artist is not None:
+            raise ValidationError('Email already being used!')
+
+
+class EditArtistForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    genre = StringField('Genre', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    submit = SubmitField('Register')
+
+    def validate_email(self, email):
+        artist = Artist.objects(email=email.data).first()
+        if artist is not None and current_user.email != artist.email:
             raise ValidationError('Email already being used!')
 
 
