@@ -15,6 +15,7 @@ class NewArtistForm(FlaskForm):
     city = StringField('City', validators=[DataRequired()])
     state = StringField('State', validators=[length(min=2, max=2, message="Length should be two letters!")])
     zip = StringField('Zip code', validators=[length(min=5, max=5, message="Should be 5 numbers long!")])
+    image = StringField('Profile Image url', validators=[Optional()])
     spotify = StringField('Spotify url', validators=[Optional()])  # removed url check because was never accepting
     youtube = StringField('Youtube url', validators=[Optional()])  # removed url check because was never accepting
     facebook = StringField('Facebook url', validators=[Optional()])  # removed url check because was never accepting

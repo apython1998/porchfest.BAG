@@ -124,7 +124,7 @@ def signUp():
             mediaLinks.append(form.youtube.data)
         if form.spotify.data != "":
             mediaLinks.append(form.spotify.data)
-        newArtist = Artist(email=form.email.data, name=form.bandName.data, description=form.description.data, media_links=mediaLinks, location=location)
+        newArtist = Artist(email=form.email.data, name=form.bandName.data, description=form.description.data, media_links=mediaLinks, location=location, image=form.image.data)
         newArtist.set_password(form.password.data)
         newArtist.save(cascade=True)
         return redirect(url_for('logIn'))  # probably want to send to artist page once that exists
@@ -169,3 +169,10 @@ def addPorch():
         porchfest.save(cascade=True)
         return redirect(url_for('index'))
     return render_template('addPorch.html', form=form)
+
+
+@app.route('/sign_up', methods=['GET', 'POST'])
+def artistFestSignUp():
+    form = ArtistPorchfestSignUpForm()
+    porchfests = Porchfest.objects()
+    form.porchfest_id.choices = [(p.location.zip_code, p.location.city + ", " + p.location.state) for p in porchfests]
