@@ -1,3 +1,11 @@
-.nav {
-    color: #000000;
+p {
+    color: black;
+}
+
+body {
+    background-color: white;
+}
+
+navbar {
+    background-color: transparent;
 }
