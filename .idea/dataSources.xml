@@ -1,4 +1,5 @@
-on="4">	
+<?xml version='1.0' encoding='utf-8'?>	
+<project>
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">	
     <data-source source="LOCAL" name="app.db" uuid="8b3d315e-6ee5-4f55-a070-0e05aabd7d6a">	
       <driver-ref>sqlite.xerial</driver-ref>	

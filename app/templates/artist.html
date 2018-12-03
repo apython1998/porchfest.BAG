@@ -1,5 +1,56 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <p>This is the page for {{ artist.name }}</p>
+    <div class="col-xs-3">
+        <div class="text-center col-xs-12">
+            {% if artist.image %}
+            <img width="200px" height="200px" src="{{ artist.image }}"/>
+            {% else %}
+            <img width="200px" height="200px" src="https://miquon.org/wp-content/uploads/2016/02/GenericUser.png"/>
+            {% endif %}
+        </div>
+        <div class="text-center col-xs-12">
+            {% if current_user.is_authenticated and current_user == artist %}
+            <button class="btn btn-primary" onclick="location.href='{{ url_for("edit_artist") }}'">Edit Profile</button>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-xs-9">
+        <div class="col-xs-12">
+            <h3>{{ artist.name }}</h3>
+            <b>Genre : {{ artist.genre }}</b><br>
+            <b>Description : {{ artist.description }}</b><br>
+            <b><label for="media_links">Media Links:</label></b><br>
+            <ul id="media_links">
+            {% if artist.media_links or artist.media_links|length == 0 %}
+                <li><p>{{ artist.name }} have no media links at this time. Please check back soon! :)</p></li>
+            {% else %}
+                {% for link in artist.media_links %}
+                    <li><a href="{{ link }}">{{ link }}</a></li>
+                {% endfor %}
+            {% endif %}
+            </ul>
+        </div>
+    </div>
+
+    <hr>
+
+    <div id="shows_for_artist" class="col-xs-12">
+         <div class="col-xs-6 col-xs-offset-3 text-center">
+             <b><label for="shows_table">Shows for {{ artist.name }}</label></b><br>
+             {% if shows|length == 0 %}
+             <b>{{ artist.name }} is not currently signed up to play any shows! Check back soon! :)</b>
+             {% else %}
+             <table class="table table-bordered bg-light table-hover">
+                {% for show in shows %}
+                <tr>
+                    <td>
+                        <b>{{ show.artist.name }} is playing at {{ show.porch.address }}, {{ show.porch.location.city }}, {{ show.porch.location.state }} starting at {{ show.start_time }}</b>
+                    </td>
+                </tr>
+                {% endfor %}
+             </table>
+             {% endif %}
+         </div>
+    </div>
 {% endblock %}

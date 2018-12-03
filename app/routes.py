@@ -1,12 +1,10 @@
-
 from flask import render_template, url_for, redirect, flash, request, jsonify
 from werkzeug.urls import url_parse
 from app import app
 from app.models import Artist, Porch, Porchfest, Show, Location
 from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required
-from app.forms import NewArtistForm, LoginForm, PorchForm, ArtistPorchfestSignUpForm, FindAPorchfestForm
-
+from app.forms import NewArtistForm, LoginForm, PorchForm, ArtistPorchfestSignUpForm, FindAPorchfestForm, EditArtistForm
 
 
 @app.route('/reset_db')
@@ -22,10 +20,10 @@ def reset_db():
     for show in Show.objects:
         show.delete()
     times = [
-        datetime(2018, 9, 26, 9, 0, 0),  # start for porchfests
-        datetime(2018, 9, 26, 17, 0, 0),  # end for porchfests
-        datetime(2018, 9, 26, 12, 0, 0),  # first show end time
-        datetime(2018, 9, 26, 15, 0, 0)  # second show end time
+        datetime(2018, 12, 26, 9, 0, 0),  # start for porchfests
+        datetime(2018, 12, 26, 17, 0, 0),  # end for porchfests
+        datetime(2018, 12, 26, 12, 0, 0),  # first show end time
+        datetime(2018, 12, 26, 15, 0, 0)  # second show end time
     ]
     default_locations = [
         Location(city='Ithaca', state='NY', zip_code='14850'),
@@ -46,8 +44,10 @@ def reset_db():
     for porch in default_porches:
         porch.save(cascade=True)
     default_artists = [
-        Artist(email='artist1@email.com', name='Artist 1', description='artist 1 desc', media_links=[],
-               location=Location.objects(city='Ithaca', state='NY').first()),
+        Artist(email='artist1@email.com', name='Artist 1', description='artist 1 desc',
+               media_links=['https://www.spotify.com/artist1'],
+               location=Location.objects(city='Ithaca', state='NY').first(),
+               image='https://miquon.org/wp-content/uploads/2016/02/GenericUser.png'),
         Artist(email='artist2@email.com', name='Artist 2', description='artist 2 desc',
                media_links=['https://myspotify.com'], location=Location.objects(city='Albany', state='NY').first())
     ]
@@ -88,7 +88,7 @@ def findaporchfest():
     return render_template('findaporchfest.html', form=form)
 
 
-@app.route('/_artists_for_porchfest')
+@app.route('/_artists_for_porchfest') # restful lookup for findaporchfest page
 def artists_for_porchfest():
     porchfest_id = request.args.get('porchfestID', '')
     porchfest = Porchfest.objects.get(id=porchfest_id)
@@ -103,7 +103,30 @@ def artists_for_porchfest():
 @app.route('/artist/<artist_name>')
 def artist(artist_name):
     artist = Artist.objects(name=artist_name).first_or_404()
-    return render_template('artist.html', artist=artist)
+    shows_for_artist = Show.objects(artist=artist, start_time__gt=datetime.utcnow)
+    return render_template('artist.html', artist=artist, shows=shows_for_artist)
+
+
+@login_required
+@app.route('/edit_artist', methods=['GET', 'POST'])
+def edit_artist():
+    if current_user._class_name is 'Artist':
+        form = EditArtistForm()
+        if form.validate_on_submit():
+            current_user.email = form.email.data
+            current_user.genre = form.genre.data
+            current_user.description = form.description.data
+            current_user.save(cascade=True)
+            flash('Artist info has been updated successfully')
+            return redirect(url_for('artist', artist_name=current_user.name))
+        elif request.method == 'GET':
+            form.email.data = current_user.email
+            form.genre.data = current_user.genre
+            form.description.data = current_user.description
+        return render_template('signUp.html', form=form)
+    else:
+        flash("You are not authorized to edit artist info!")
+        return redirect(url_for('index'))
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -124,7 +147,8 @@ def signUp():
             mediaLinks.append(form.youtube.data)
         if form.spotify.data != "":
             mediaLinks.append(form.spotify.data)
-        newArtist = Artist(email=form.email.data, name=form.bandName.data, description=form.description.data, media_links=mediaLinks, location=location, image=form.image.data)
+        newArtist = Artist(email=form.email.data, name=form.bandName.data, description=form.description.data,
+                           media_links=mediaLinks, location=location, genre=form.genre.data)
         newArtist.set_password(form.password.data)
         newArtist.save(cascade=True)
         return redirect(url_for('logIn'))  # probably want to send to artist page once that exists
@@ -149,6 +173,12 @@ def logIn():
             next_page = url_for('index')  # maybe change this to artist's page
         return redirect(next_page)
     return render_template('login.html', form=form)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 
 @app.route('/new_porch', methods=['GET', 'POST'])
