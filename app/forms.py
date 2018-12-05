@@ -71,6 +71,12 @@ class PorchForm(FlaskForm):
     endTime = DateTimeLocalField('End time available', format='%Y-%m-%dT%H:%M', validators=[])
     submit = SubmitField('Submit')
 
+    def validate_address(self, address):
+        porch = Porch.objects(address=address.data).first()
+        if porch is not None:
+            raise ValidationError("Porch is already in the database!")
+
+
     def validate_zip(self, zip):
         for c in zip.data:
             if c.isalpha():
@@ -85,7 +91,8 @@ class PorchForm(FlaskForm):
     def validate_time(self, startTime, endTime, porchfest_id):
         if endTime.data < startTime.data:
             raise ValidationError('End time must be after start time')
-        fest = Porchfest.objects(id=porchfest_id).first()
+        # change to search using zip code
+        fest = Porchfest.objects(location=Location.objects(zip_code=porchfest_id.data).first()).first()
         if endTime.data < fest.start_time or endTime.data > fest.end_time:
             raise ValidationError('Times must be during Porchfest times')
         if startTime.data < fest.start_time or startTime.data > fest.end_time:
@@ -94,11 +101,13 @@ class PorchForm(FlaskForm):
 
 
 class ArtistPorchfestSignUpForm(FlaskForm):
-    porchfest = SelectField('Choose a porchfest', validators=[DataRequired()], coerce=int)
+    porchfest = SelectField('Choose a porchfest', validators=[DataRequired()])
     porch = BooleanField('I already have a porch')
     # can check that location matches with location of selected porchfest
     # maybe validate by checking address exists with map api
     # maybe keep this hidden unless the checkbox is clicked
+    porch_owner = StringField('Name of porch owner (if you have a porch)', validators=[])
+    porch_email = StringField('Email of porch owner (if you have a porch)', validators=[Email()])
     address = StringField('Address (if you have a porch)', validators=[])
     city = StringField('City (if you have a porch)', validators=[])
     state = StringField('State (if you have a porch)', validators=[length(min=0, max=2, message="Length should be two letters!")])
@@ -113,11 +122,19 @@ class ArtistPorchfestSignUpForm(FlaskForm):
                 raise ValidationError('Zip code must consist of only integers')
 
     def validate_location(self, porchfest, city, state, zip):
-        # think this id in the query may need to be the zip code because i believe that is what is serving as the id
-        fest = Porchfest.objects(id=porchfest.data).first()
-        festLocation = fest.location
+        festLocation = Location.objects(zip_code=porchfest.data).first
         if festLocation.city != city.data or festLocation.state != state.data or festLocation.zip_code != zip.data:
             raise ValidationError('Location does not match the location of the selected Porchfest!')
+
+    def validate_time(self, startTime, endTime, porchfest):
+        if endTime.data < startTime.data:
+            raise ValidationError('End time must be after start time')
+        # change to search using zip code
+        fest = Porchfest.objects(location=Location.objects(zip_code=porchfest.data).first()).first()
+        if endTime.data < fest.start_time or endTime.data > fest.end_time:
+            raise ValidationError('Times must be during Porchfest times')
+        if startTime.data < fest.start_time or startTime.data > fest.end_time:
+            raise ValidationError('Times must be during Porchfest times')
 
     def has_porch_validator(self, address, city, state, zip, porch):
         if porch.data:
