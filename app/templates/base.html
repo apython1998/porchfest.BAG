@@ -23,10 +23,15 @@
                     <a class="navbar-brand" href="{{ url_for('index') }}">Porchfest!</a>
             </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ url_for('logIn') }}">Login</a></li>
-                    <li><a href="{{ url_for('signUp') }}">Artist Sign Ups</a></li>
                     <li><a href="{{ url_for('findaporchfest') }}">Find a Porchfest</a></li>
-
+                    <li><a href="{{ url_for('addPorch') }}">I Have a Porch</a></li>
+                {% if current_user.is_anonymous %}
+                    <li><a href="{{ url_for('signUp') }}">I Have a Band</a></li>
+                    <li><a href="{{ url_for('logIn') }}">Login</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('artist', artist_name=current_user.name) }}">My Artist Page</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% endif %}
                 </ul>
             </div>
         </div>

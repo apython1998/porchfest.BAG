@@ -25,6 +25,8 @@ class Artist(UserMixin, db.Document):
     description = db.StringField()
     media_links = db.ListField(db.StringField())
     location = db.ReferenceField(Location)
+    image = db.StringField()
+    genre = db.StringField()
 
     def __repr__(self):
         return '<Artist {}>'.format(self.name)
