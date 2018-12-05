@@ -77,8 +77,8 @@ class PorchForm(FlaskForm):
                 raise ValidationError('Zip code must consist of only integers')
 
     def validate_location(self, porchfest_id, city, state, zip):
-        fest = Porchfest.objects(id=porchfest_id).first()
-        festLocation = fest.location
+        # think this id in the query may need to be the zip code because i believe that is what is serving as the id
+        festLocation = Location.objects(zip_code=porchfest_id.data).first
         if festLocation.city != city.data or festLocation.state != state.data or festLocation.zip_code != zip.data:
             raise ValidationError('Location does not match the location of the selected Porchfest!')
 
@@ -99,17 +99,47 @@ class ArtistPorchfestSignUpForm(FlaskForm):
     # can check that location matches with location of selected porchfest
     # maybe validate by checking address exists with map api
     # maybe keep this hidden unless the checkbox is clicked
-    address = StringField('Address', validators=[DataRequired()])
-    city = StringField('City', validators=[DataRequired()])
-    state = StringField('State', validators=[length(min=2, max=2, message="Length should be two letters!")])
-    zip = StringField('Zip code', validators=[length(min=5, max=5, message="Should be 5 numbers long!")])
-    # times playing?
+    address = StringField('Address (if you have a porch)', validators=[])
+    city = StringField('City (if you have a porch)', validators=[])
+    state = StringField('State (if you have a porch)', validators=[length(min=0, max=2, message="Length should be two letters!")])
+    zip = StringField('Zip code (if you have a porch)', validators=[length(min=0, max=5, message="Should be 5 numbers long!")])
+    startTime = DateTimeLocalField('Start time available', format='%Y-%m-%dT%H:%M', validators=[])
+    endTime = DateTimeLocalField('End time available', format='%Y-%m-%dT%H:%M', validators=[])
     submit = SubmitField('Submit')
 
     def validate_zip(self, zip):
         for c in zip.data:
             if c.isalpha():
                 raise ValidationError('Zip code must consist of only integers')
+
+    def validate_location(self, porchfest, city, state, zip):
+        # think this id in the query may need to be the zip code because i believe that is what is serving as the id
+        fest = Porchfest.objects(id=porchfest.data).first()
+        festLocation = fest.location
+        if festLocation.city != city.data or festLocation.state != state.data or festLocation.zip_code != zip.data:
+            raise ValidationError('Location does not match the location of the selected Porchfest!')
+
+    def has_porch_validator(self, address, city, state, zip, porch):
+        if porch.data:
+            if address.data == "":
+                raise ValidationError('If you have a porch you must enter the address!')
+            if city.data == "":
+                raise ValidationError('If you have a porch you must enter the city!')
+            if state.data == "":
+                raise ValidationError('If you have a porch you must enter the state!')
+            if zip.data == "":
+                raise ValidationError('If you have a porch you must enter the zip code!')
+        else:
+            if address.data != "":
+                raise ValidationError('Leave address blank if you do not have a porch yet!')
+            if city.data != "":
+                raise ValidationError('Leave city blank if you do not have a porch yet!')
+            if state.data != "":
+                raise ValidationError('Leave state blank if you do not have a porch yet!')
+            if zip.data != "":
+                raise ValidationError('Leave zip code blank if you do not have a porch yet!')
+
+
 
 
 class LoginForm(FlaskForm):
