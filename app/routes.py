@@ -148,7 +148,7 @@ def signUp():
         if form.spotify.data != "":
             mediaLinks.append(form.spotify.data)
         newArtist = Artist(email=form.email.data, name=form.bandName.data, description=form.description.data,
-                           media_links=mediaLinks, location=location, genre=form.genre.data)
+                           media_links=mediaLinks, location=location, genre=form.genre.data, image=form.image.data)
         newArtist.set_password(form.password.data)
         newArtist.save(cascade=True)
         return redirect(url_for('logIn'))  # probably want to send to artist page once that exists
@@ -184,10 +184,40 @@ def logout():
 @app.route('/new_porch', methods=['GET', 'POST'])
 def addPorch():
     form = PorchForm()
-    form.porchfest_id.choices = []
-    # need to populate select fields!
+    porchfests = Porchfest.objects()
+    form.porchfest_id.choices = [(p.location.zip_code, p.location.city+", "+p.location.state) for p in porchfests]
     if form.validate_on_submit():
-        # add porch to db
-
+        flash('Porch added!')
+        location = Location.objects(city=form.city.data, state=form.state.data).first()
+        if location is None:
+            location = Location(city=form.city.data, state=form.state.data, zip_code=form.zip.data)
+            location.save(cascade=True)
+        newPorch = Porch(name=form.name.data, email=form.email.data, address=form.address.data, location=location, time_available_start=form.startTime.data, time_available_end=form.endTime.data)
+        newPorch.save(cascade=True)
+        porchfest = Porchfest.objects(location=location.id).first()
+        porchfest.porches.append(newPorch)
+        porchfest.save(cascade=True)
         return redirect(url_for('index'))
     return render_template('addPorch.html', form=form)
+
+
+@app.route('/sign_up', methods=['GET', 'POST'])
+def artistFestSignUp():
+    form = ArtistPorchfestSignUpForm()
+    porchfests = Porchfest.objects()
+    form.porchfest.choices = [(p.location.zip_code, p.location.city + ", " + p.location.state) for p in porchfests]
+    if form.validate_on_submit():
+        flash('Signed up for '+form.city.data+", "+form.state.data+" porchfest!")
+        artist = Artist.objects(name=current_user.__name__).first()
+        location = Location.objects(zip_code=form.zip.data).first()
+        if form.porch.data:
+            porch = Porch.objects(address=form.address.data).first()
+            if porch is None:
+                porch = Porch(name=form.porch_owner.data, email=form.porch_email.data, address=form.address.data, location=location, time_available_start=form.startTime.data, time_available_end=form.endTime.data)
+                porch.save(cascade=True)
+        else:
+            porch = None
+        show = Show(artist=artist, porch=porch, start_time=form.startTime.data, end_time=form.startTime.data)
+        show.save(cascade=True)
+        return redirect(url_for('index'))
+    return render_template('artistToPorch.html', form=form)
