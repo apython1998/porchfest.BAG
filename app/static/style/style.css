@@ -1,11 +1,67 @@
 p {
-    color: black;
+    color: #white;
 }
 
-body {
-    background-color: white;
+body{
+  background-color: white;
+  background-size: 100% 500px;
+  background-repeat: no-repeat;
+  background-position: left top;
 }
 
-.navbar {
-    background-color: transparent;
+
+a {
+    color: #cf2a20;
+}
+
+text{
+
+  color: #cf2a20;
+}
+
+.mainbutton{
+
+  background-color: #fdbc3f;
+  position: relative;
+  top: 375px;
+  left: 400px;
+  border: none;
+  color: white;
+  padding: 32px 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+}
+
+.mainbutton:hover{
+  background-color: #cf2a20;
+  color: white;
+}
+
+.navbar-default {
+  background-color: #fdbc3f;
+  border-color: transparent;
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: white;
+  background-color: #cf2a20;
+}
+.navbar-default .navbar-text {
+  color: white;
+}
+.navbar-default .navbar-nav > li > a {
+  color: white;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  background-color: #cf2a20;
+  color: white;
 }
