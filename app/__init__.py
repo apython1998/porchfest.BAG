@@ -15,6 +15,7 @@ login = LoginManager(app)
 login.login_view = 'login'
 bootstrap = Bootstrap(app)
 
+
 if not app.debug:
     if not os.path.exists('logs'):
         os.mkdir('logs')
