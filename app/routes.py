@@ -5,6 +5,8 @@ from app.models import Artist, Porch, Porchfest, Show, Location
 from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required
 from app.forms import NewArtistForm, LoginForm, PorchForm, ArtistPorchfestSignUpForm, FindAPorchfestForm, EditArtistForm
+from flask_googlemaps import GoogleMaps, Map
+import requests
 
 
 @app.route('/reset_db')
@@ -84,9 +86,18 @@ def index():
 
 @app.route('/find_a_porchfest')
 def findaporchfest():
-    form = FindAPorchfestForm()
+    default = Porchfest.objects(location=Location.objects(zip_code='14850').first()).first()
+    form = FindAPorchfestForm(porchfest=default.id)
     form.porchfest.choices = [("", "---")] + [(p.id, p.location.city + ', ' + p.location.state) for p in Porchfest.objects()]
-    return render_template('findaporchfest.html', form=form)
+    # GOOGLE_MAPS_API_URL = 'http://maps.googleapis.com/maps/api/geocode/json'
+
+    myMap = Map(
+        identifier="view_side",
+        lat=37.4419,
+        lng=-122.1419,
+        markers=[(37.4419, -122.1419)]
+    )
+    return render_template('findaporchfest.html', form=form, mymap=myMap)
 
 
 @app.route('/_artists_for_porchfest') # restful lookup for findaporchfest page

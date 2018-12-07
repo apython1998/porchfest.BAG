@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
 import os
 import logging
+from flask_googlemaps import GoogleMaps
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -13,6 +14,7 @@ db = MongoEngine(app)
 login = LoginManager(app)
 login.login_view = 'login'
 bootstrap = Bootstrap(app)
+
 
 if not app.debug:
     if not os.path.exists('logs'):
