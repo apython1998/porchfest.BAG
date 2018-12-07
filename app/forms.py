@@ -4,6 +4,7 @@ from wtforms import StringField, TextAreaField, SubmitField, PasswordField, Bool
 from wtforms.fields.html5 import DateTimeField, DateField, DateTimeLocalField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, length, URL, Optional
 from app.models import Artist, Location, Porch, Porchfest
+from datetime import datetime
 
 
 class NewArtistForm(FlaskForm):
@@ -76,27 +77,37 @@ class PorchForm(FlaskForm):
         if porch is not None:
             raise ValidationError("Porch is already in the database!")
 
-
     def validate_zip(self, zip):
+        if self.porchfest_id.data != zip.data:
+            raise ValidationError('Does not match the zip code of the selected Porchfest!')
         for c in zip.data:
             if c.isalpha():
                 raise ValidationError('Zip code must consist of only integers')
 
-    def validate_location(self, porchfest_id, city, state, zip):
-        # think this id in the query may need to be the zip code because i believe that is what is serving as the id
-        festLocation = Location.objects(zip_code=porchfest_id.data).first
-        if festLocation.city != city.data or festLocation.state != state.data or festLocation.zip_code != zip.data:
-            raise ValidationError('Location does not match the location of the selected Porchfest!')
+    def validate_city(self, city):
+        fest_location = Location.objects(zip_code=self.porchfest_id.data).first()
+        if fest_location.city != city.data:
+            raise ValidationError('Does not match the city of the selected Porchfest!')
 
-    def validate_time(self, startTime, endTime, porchfest_id):
-        if endTime.data < startTime.data:
+    def validate_state(self, state):
+        fest_location = Location.objects(zip_code=self.porchfest_id.data).first()
+        if fest_location.state != state.data:
+            raise ValidationError('Does not match the state of the selected Porchfest!')
+
+    def validate_startTime(self, startTime):
+        if self.endTime.data <= startTime.data:
             raise ValidationError('End time must be after start time')
-        # change to search using zip code
-        fest = Porchfest.objects(location=Location.objects(zip_code=porchfest_id.data).first()).first()
-        if endTime.data < fest.start_time or endTime.data > fest.end_time:
-            raise ValidationError('Times must be during Porchfest times')
+        fest = Porchfest.objects(location=Location.objects(zip_code=self.porchfest_id.data).first()).first()
         if startTime.data < fest.start_time or startTime.data > fest.end_time:
             raise ValidationError('Times must be during Porchfest times')
+
+    def validate_endTime(self, endTime):
+        if self.endTime.data <= self.startTime.data:
+            raise ValidationError('End time must be after start time')
+        fest = Porchfest.objects(location=Location.objects(zip_code=self.porchfest_id.data).first()).first()
+        if endTime.data < fest.start_time or endTime.data > fest.end_time:
+            raise ValidationError('Times must be during Porchfest times')
+
 
 
 
@@ -117,46 +128,62 @@ class ArtistPorchfestSignUpForm(FlaskForm):
     submit = SubmitField('Submit')
 
     def validate_zip(self, zip):
+        if self.porch.data:
+            if zip.data == "":
+                raise ValidationError('If you have a porch you must enter the zip code!')
+        else:
+            if zip.data != "":
+                raise ValidationError('Leave zip code blank if you do not have a porch yet!')
+        if self.porchfest_id.data != zip.data:
+            raise ValidationError('Does not match the zip code of the selected Porchfest!')
         for c in zip.data:
             if c.isalpha():
                 raise ValidationError('Zip code must consist of only integers')
 
-    def validate_location(self, porchfest, city, state, zip):
-        festLocation = Location.objects(zip_code=porchfest.data).first
-        if festLocation.city != city.data or festLocation.state != state.data or festLocation.zip_code != zip.data:
-            raise ValidationError('Location does not match the location of the selected Porchfest!')
+    def validate_city(self, city):
+        if self.porch.data:
+            if city.data == "":
+                raise ValidationError('If you have a porch you must enter the city!')
+        else:
+            if city.data != "":
+                raise ValidationError('Leave city blank if you do not have a porch yet!')
+        fest_location = Location.objects(zip_code=self.porchfest.data).first()
+        if fest_location.city != city.data:
+            raise ValidationError('Does not match the city of the selected Porchfest!')
 
-    def validate_time(self, startTime, endTime, porchfest):
-        if endTime.data < startTime.data:
+    def validate_state(self, state):
+        fest_location = Location.objects(zip_code=self.porchfest.data).first()
+        if self.porch.data:
+            if state.data == "":
+                raise ValidationError('If you have a porch you must enter the state!')
+        else:
+            if state.data != "":
+                raise ValidationError('Leave state blank if you do not have a porch yet!')
+        if fest_location.state != state.data:
+            raise ValidationError('Does not match the state of the selected Porchfest!')
+
+    def validate_startTime(self, startTime):
+        if self.endTime.data < startTime.data:
             raise ValidationError('End time must be after start time')
-        # change to search using zip code
-        fest = Porchfest.objects(location=Location.objects(zip_code=porchfest.data).first()).first()
-        if endTime.data < fest.start_time or endTime.data > fest.end_time:
-            raise ValidationError('Times must be during Porchfest times')
+        fest = Porchfest.objects(location=Location.objects(zip_code=self.porchfest.data).first()).first()
         if startTime.data < fest.start_time or startTime.data > fest.end_time:
             raise ValidationError('Times must be during Porchfest times')
 
-    def has_porch_validator(self, address, city, state, zip, porch):
+    def validate_endTime(self, endTime):
+        if endTime.data < self.startTime.data:
+            raise ValidationError('End time must be after start time')
+        fest = Porchfest.objects(location=Location.objects(zip_code=self.porchfest.data).first()).first()
+        if endTime.data < fest.start_time or endTime.data > fest.end_time:
+            raise ValidationError('Times must be during Porchfest times')
+
+    def validate_address(self, address, porch):
+        # porch already in db and not available at those times
         if porch.data:
             if address.data == "":
                 raise ValidationError('If you have a porch you must enter the address!')
-            if city.data == "":
-                raise ValidationError('If you have a porch you must enter the city!')
-            if state.data == "":
-                raise ValidationError('If you have a porch you must enter the state!')
-            if zip.data == "":
-                raise ValidationError('If you have a porch you must enter the zip code!')
         else:
             if address.data != "":
                 raise ValidationError('Leave address blank if you do not have a porch yet!')
-            if city.data != "":
-                raise ValidationError('Leave city blank if you do not have a porch yet!')
-            if state.data != "":
-                raise ValidationError('Leave state blank if you do not have a porch yet!')
-            if zip.data != "":
-                raise ValidationError('Leave zip code blank if you do not have a porch yet!')
-
-
 
 
 class LoginForm(FlaskForm):
