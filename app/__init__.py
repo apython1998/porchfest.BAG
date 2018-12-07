@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
 import os
 import logging
+from flask_googlemaps import GoogleMaps
 
 app = Flask(__name__)
 app.config.from_object(Config)
