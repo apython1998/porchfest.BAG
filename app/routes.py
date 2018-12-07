@@ -186,9 +186,10 @@ def logout():
 def addPorch():
     form = PorchForm()
     porchfests = Porchfest.objects()
-    form.porchfest_id.choices = [(p.location.zip_code, p.location.city+", "+p.location.state) for p in porchfests]
+    form.porchfest_id.choices = [(p.location.zip_code, p.location.city+", "+p.location.state+" "+p.start_time.strftime("%m-%d-%Y %H:%M")+" to "+p.end_time.strftime("%m-%d-%Y %H:%M")) for p in porchfests]
     if form.validate_on_submit():
         flash('Porch added!')
+        flash(form.startTime.data > form.endTime.data)
         location = Location.objects(city=form.city.data, state=form.state.data).first()
         if location is None:
             location = Location(city=form.city.data, state=form.state.data, zip_code=form.zip.data)
@@ -202,11 +203,12 @@ def addPorch():
     return render_template('addPorch.html', form=form)
 
 
+@login_required
 @app.route('/sign_up', methods=['GET', 'POST'])
 def artistFestSignUp():
     form = ArtistPorchfestSignUpForm()
     porchfests = Porchfest.objects()
-    form.porchfest.choices = [(p.location.zip_code, p.location.city + ", " + p.location.state) for p in porchfests]
+    form.porchfest.choices = [(p.location.zip_code, p.location.city + ", " + p.location.state+" "+p.start_time.strftime("%m-%d-%Y %H:%M")+" to "+p.end_time.strftime("%m-%d-%Y %H:%M")) for p in porchfests]
     if form.validate_on_submit():
         flash('Signed up for '+form.city.data+", "+form.state.data+" porchfest!")
         artist = Artist.objects(name=current_user.__name__).first()
