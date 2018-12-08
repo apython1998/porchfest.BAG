@@ -87,7 +87,7 @@ def index():
 def findaporchfest():
     default = Porchfest.objects(location=Location.objects(zip_code='14850').first()).first()
     form = FindAPorchfestForm(porchfest=default.id)
-    form.porchfest.choices = [("", "---")] + [(p.id, p.location.city + ', ' + p.location.state) for p in Porchfest.objects()]
+    form.porchfest.choices = [("", "---")] + [(p.id, p.location.city + ", " + p.location.state+" "+p.start_time.strftime("%m-%d-%Y %H:%M")+" to "+p.end_time.strftime("%m-%d-%Y %H:%M")) for p in Porchfest.objects()]
     # GOOGLE_MAPS_API_URL = 'http://maps.googleapis.com/maps/api/geocode/json'
 
     myMap = Map(
