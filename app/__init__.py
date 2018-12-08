@@ -14,6 +14,8 @@ db = MongoEngine(app)
 login = LoginManager(app)
 login.login_view = 'login'
 bootstrap = Bootstrap(app)
+app.config['GOOGLEMAPS_KEY'] = 'AIzaSyCYzkoBrnmcTkdPO618IHyPo7PZOAgeg-4'
+gmaps = GoogleMaps(app)
 
 
 if not app.debug:
