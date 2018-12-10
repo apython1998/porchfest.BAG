@@ -7,6 +7,7 @@
 {%  block styles %}
     {{ super() }}
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Butterfly+Kids" rel="stylesheet">
 {% endblock %}
 
 
@@ -20,7 +21,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                    <a class="navbar-brand navbar-default" href="{{ url_for('index') }}">Porchfest!</a>
+                    <a class="navbar-brand navbar-default" href="{{ url_for('index') }}">Porchfest</a>
             </div>
                 <ul class="nav navbar-nav navbar-right navbar-default">
                     <li><a href="{{ url_for('addPorch') }}">I Have a Porch</a></li>
