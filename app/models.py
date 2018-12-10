@@ -50,6 +50,8 @@ class Porch(db.Document):
     location = db.ReferenceField(Location)
     time_available_start = db.DateTimeField(default=datetime.utcnow)
     time_available_end = db.DateTimeField(default=datetime.utcnow)
+    lat = db.FloatField()
+    long = db.FloatField()
     meta = {
         'indexes': [
             {'fields': ('address', 'location'), 'unique': True}
