@@ -2,11 +2,13 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
+    {{ mymap.js }}
     <div class="col-xs-4 col-xs-offset-4" id="selectAPorchfest">
         {{ wtf.quick_form(form) }}
     </div>
     <div class="col-xs-4 col-xs-offset-4" id="map">
         <b>MAP GOES HERE</b>
+        {{ mymap.html }}
     </div>
     <div class="col-xs-6 col-xs-offset-3" id="artistList">
         <b>Select an event to see the artists for a Porchfest</b>

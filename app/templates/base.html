@@ -30,6 +30,7 @@
                     <li><a href="{{ url_for('logIn') }}">Login</a></li>
                 {% else %}
                     <li><a href="{{ url_for('artist', artist_name=current_user.name) }}">My Artist Page</a></li>
+                    <li><a href="{{ url_for('artistFestSignUp') }}">Sign Up for a Porchfest</a> </li>
                     <li><a href="{{ url_for('logout') }}">Logout</a></li>
                 {% endif %}
                 </ul>
