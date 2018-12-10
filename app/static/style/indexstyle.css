@@ -6,7 +6,7 @@ body{
 }
 
 .style{
-  font-family: "Nanum Brush Script";
+  font-family: 'Rancho', cursive;;
   color: white;
   font-size: 90px;
   /*background: rgba(255, 255, 255, 0.8);*/
@@ -15,7 +15,7 @@ body{
 .mainbutton{
   background-color: #fdbc3f;
   position: relative;
-  top: 315px;
+  top: 280px;
   left: 400px;
   border: none;
   color: white;
@@ -24,6 +24,6 @@ body{
   text-decoration: none;
   display: inline-block;
   font-size: 40px;
-  font-family: "Nanum Pen Script";
+  font-family: 'Rancho', cursive;;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
