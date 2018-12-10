@@ -68,7 +68,7 @@ class Show(db.Document):
     end_time = db.DateTimeField(default=datetime.utcnow)
     meta = {
         'indexes': [
-            {'fields': ('artist', 'porch'), 'unique': True}
+            {'fields': ('artist', 'start_time'), 'unique': True}
         ]
     }
 

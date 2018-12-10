@@ -103,7 +103,9 @@ class PorchForm(FlaskForm):
 
 class ArtistPorchfestSignUpForm(FlaskForm):
     porchfest = SelectField('Choose a porchfest', validators=[DataRequired()], coerce=ObjectId)
+    time_slot = SelectField('When Will your Show Start', validators=[DataRequired()], id='timeslot')
     porch = BooleanField('I already have a porch')
+    porch_selector = SelectField('Choose a Porch', id='porchselect', coerce=ObjectId)
     # can check that location matches with location of selected porchfest
     # maybe validate by checking address exists with map api
     # maybe keep this hidden unless the checkbox is clicked
@@ -113,7 +115,6 @@ class ArtistPorchfestSignUpForm(FlaskForm):
     city = StringField('City (if you have a porch)', validators=[], id='city')
     state = StringField('State (if you have a porch)', validators=[length(min=0, max=2, message="Length should be two letters!")], id='state')
     zip = StringField('Zip code (if you have a porch)', validators=[length(min=0, max=5, message="Should be 5 numbers long!")], id='zip')
-    time_slot = SelectField('When Will your Show Start', validators=[DataRequired()], id='timeslot')
     submit = SubmitField('Submit')
 
     def validate_email(self, email):

@@ -201,7 +201,6 @@ def get_time_slots():
     while current_time < end_time:
         time_object = current_time
         time_slots.append({
-            'time_object': time_object,
             'time_text': time_object.strftime('%-I %p')
                        })
         current_time += timedelta(hours=1)
@@ -255,31 +254,24 @@ def addPorch():
     return render_template('addPorch.html', form=form)
 
 
+@app.route('_get_available_porches')
+def get_available_porches():
+    pass
+
+
 @login_required
 @app.route('/sign_up', methods=['GET', 'POST'])
 def artistFestSignUp():
     form = ArtistPorchfestSignUpForm()
     porchfests = Porchfest.objects()
     form.porchfest.choices = [(p.id, p.location.city + ", " + p.location.state+" "+p.start_time.strftime("%m-%d-%Y %H:%M")+" to "+p.end_time.strftime("%m-%d-%Y %H:%M")) for p in porchfests]
+    form.porch_selector.choices = [(p.id, p.address + " " + p.location.city + ", " + p.location.state) for p in Porch.objects()]
     form.time_slot.choices = [(t, t) for t in get_all_hours()]
     if form.validate_on_submit():
         porchfest = Porchfest.objects(id=form.porchfest.data).first()
         porchfest_location = porchfest.location
         porchfest_time = porchfest.start_time
-        artist = Artist.objects(name=current_user.name).first()
-        if form.porch.data:
-            location = Location.objects(city=form.city.data, state=form.state.data).first()
-            if location is None:
-                location = Location(city=form.city.data, state=form.state.data, zip_code=form.zip.data)
-                location.save(cascade=True)
-            porch = Porch.objects(address=form.address.data).first()
-            if porch is None:
-                porch = Porch(name=form.porch_owner.data, email=form.porch_email.data, address=form.address.data, location=location, time_available_start=form.startTime.data, time_available_end=form.endTime.data)
-                porch.save(cascade=True)
-        else:
-            porch = None
         form_time = form.time_slot.data
-        hour = None
         hour_int = int(form_time.split()[0])
         if 'AM' in form_time:
             if hour_int is 12:
@@ -291,12 +283,30 @@ def artistFestSignUp():
                 hour = hour_int
             else:
                 hour = hour_int + 12
-        start_time = datetime(year=int(porchfest_time.year), month=int(porchfest_time.month), day=int(porchfest_time.day), hour=hour)
-        end_time = start_time+timedelta(hours=1)
-        show = Show(artist=artist, porch=porch, start_time=start_time, end_time=end_time)
-        show.save(cascade=True)
-        porchfest.shows.append(show)
-        porchfest.save(cascade=True)
-        flash('Signed up for ' + porchfest_location.city + ", " + porchfest_location.state + " porchfest!")
-        return redirect(url_for('index'))
+        start_time = datetime(year=int(porchfest_time.year), month=int(porchfest_time.month),
+                              day=int(porchfest_time.day), hour=hour)
+        end_time = start_time + timedelta(hours=1)
+        artist = Artist.objects(name=current_user.name).first()
+        if form.porch.data:
+            location = Location.objects(city=form.city.data, state=form.state.data).first()
+            if location is None:
+                location = Location(city=form.city.data, state=form.state.data, zip_code=form.zip.data)
+                location.save(cascade=True)
+            porch = Porch.objects(address=form.address.data).first()
+            if porch is None:
+                time_slots = [].append(start_time)
+                porch = Porch(name=form.porch_owner.data, email=form.porch_email.data, address=form.address.data, location=location, time_slots=time_slots)
+                porch.save(cascade=True)
+        else:
+            porch = None
+        existing_show = Show.objects(artist=artist, start_time=start_time).first()
+        if existing_show is not None:
+            flash('Show already exists!')
+        else:
+            show = Show(artist=artist, porch=porch, start_time=start_time, end_time=end_time)
+            show.save(cascade=True)
+            porchfest.shows.append(show)
+            porchfest.save(cascade=True)
+            flash('Signed up for ' + porchfest_location.city + ", " + porchfest_location.state + " porchfest!")
+        return redirect(url_for('artist', artist_name=artist.name))
     return render_template('artistToPorch.html', form=form)
