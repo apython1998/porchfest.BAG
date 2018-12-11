@@ -38,10 +38,10 @@ def reset_db():
     default_porches = [
         Porch(name='Ithaca Porch 1', email='ithacaPorch1@email.com', address='953 Danby Rd',
               location=Location.objects(city='Ithaca', state='NY').first(), time_available_start=times[0],
-              time_available_end=times[1]),
+              time_available_end=times[1], lat=42.4199351, long=-76.4969643),
         Porch(name='Ithaca Porch 2', email='ithacaPorch2@email.com', address='123 Ithaca Rd',
               location=Location.objects(city='Ithaca', state='NY').first(), time_available_start=times[0],
-              time_available_end=times[1])
+              time_available_end=times[1], lat=42.438657, long=-76.4800496)
     ]
     for porch in default_porches:
         porch.save(cascade=True)
@@ -87,14 +87,15 @@ def index():
 def findaporchfest():
     default = Porchfest.objects(location=Location.objects(zip_code='14850').first()).first()
     form = FindAPorchfestForm(porchfest=default.id)
-    form.porchfest.choices = [("", "---")] + [(p.id, p.location.city + ', ' + p.location.state) for p in Porchfest.objects()]
-    # GOOGLE_MAPS_API_URL = 'http://maps.googleapis.com/maps/api/geocode/json'
-
+    markers = []
+    for p in default.porches:
+        markers.append((p.lat, p.long))
+    # need a default lat and long for each fest to not crash if there are no porches
     myMap = Map(
         identifier="view_side",
-        lat=37.4419,
-        lng=-122.1419,
-        markers=[(37.4419, -122.1419)]
+        lat=markers[0].lat,
+        lng=-76.4951,
+        markers=[]
     )
     return render_template('findaporchfest.html', form=form, mymap=myMap)
 
@@ -234,3 +235,21 @@ def artistFestSignUp():
         show.save(cascade=True)
         return redirect(url_for('index'))
     return render_template('artistToPorch.html', form=form)
+
+
+""""
+    form.porchfest.choices = [("", "---")] + [(p.id, p.location.city + ', ' + p.location.state) for p in Porchfest.objects()]
+    myPorch = Porch.objects(name="Ithaca Porch 2").first()
+    address = myPorch.address.split(' ')
+    reqStr = "https://maps.googleapis.com/maps/api/geocode/json?address="
+    for i in address:
+        reqStr = reqStr+i+"+"
+    reqStr = reqStr[:-1]
+    reqStr = reqStr+myPorch.location.city+",+"+myPorch.location.state+"&key=AIzaSyCYzkoBrnmcTkdPO6l8IHyPo7PZOAgeg-4"
+    res = requests.get(reqStr)
+    resJSON = res.json()
+    data = resJSON['results'][0]
+    lat = data['geometry']['location']['lat']
+    long = data['geometry']['location']['lng']
+    flash(str(lat)+", "+str(long))
+"""

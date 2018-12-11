@@ -8,13 +8,15 @@ import os
 import logging
 from flask_googlemaps import GoogleMaps
 
+
 app = Flask(__name__)
 app.config.from_object(Config)
 db = MongoEngine(app)
 login = LoginManager(app)
 login.login_view = 'login'
 bootstrap = Bootstrap(app)
-
+app.config['GOOGLEMAPS_KEY'] = "AIzaSyCYzkoBrnmcTkdPO6l8IHyPo7PZOAgeg-4"
+GoogleMaps(app)
 
 if not app.debug:
     if not os.path.exists('logs'):

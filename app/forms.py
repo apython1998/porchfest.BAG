@@ -60,14 +60,15 @@ class EditArtistForm(FlaskForm):
 
 
 class PorchForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
+    name = StringField('Host Name', validators=[DataRequired()])
+    email = StringField('Host Email', validators=[DataRequired(), Email()])
     porchfest_id = SelectField('Choose a Porchfest', validators=[DataRequired()])
     # maybe validate by checking address exists with map api
     address = StringField('Address', validators=[DataRequired()])
     city = StringField('City', validators=[DataRequired()])
-    state = StringField('State', validators=[length(min=2, max=2, message="Length should be two letters!")])
+    state = StringField('State Abbreviation', validators=[length(min=2, max=2, message="Length should be two letters!")])
     zip = StringField('Zip code', validators=[length(min=5, max=5, message="Should be 5 numbers long!")])
+    # check boxes for time period when porch is available
     startTime = DateTimeLocalField('Start time available', format='%Y-%m-%dT%H:%M', validators=[])
     endTime = DateTimeLocalField('End time available', format='%Y-%m-%dT%H:%M', validators=[])
     submit = SubmitField('Submit')
