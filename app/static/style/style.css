@@ -1,0 +1,56 @@
+p {
+    color: #white;
+}
+
+body{
+  background-color: white;
+  background-size: 100% 500px;
+  background-repeat: no-repeat;
+  background-position: left top;
+  font-family: 'Lato', sans-serif;;
+}
+
+h1 {
+  color: #cf2a20;
+}
+
+a {
+    color: #cf2a20;
+}
+
+text{
+
+  color: #cf2a20;
+}
+
+.mainbutton:hover{
+  background-color: #cf2a20;
+  color: white;
+}
+
+.navbar-default {
+  background-color: #fdbc3f;
+  border-color: transparent;
+  font-family: 'Rancho', cursive;;
+  font-size: x-large;
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: white;
+  background-color: #cf2a20;
+}
+.navbar-default .navbar-text {
+  color: white;
+}
+.navbar-default .navbar-nav > li > a {
+  color: white;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  background-color: #cf2a20;
+  color: white;
+}

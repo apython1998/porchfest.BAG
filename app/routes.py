@@ -6,7 +6,6 @@ from datetime import datetime
 from flask_login import login_user, current_user, logout_user, login_required
 from app.forms import NewArtistForm, LoginForm, PorchForm, ArtistPorchfestSignUpForm, FindAPorchfestForm, EditArtistForm
 from flask_googlemaps import GoogleMaps, Map
-import requests
 
 
 @app.route('/reset_db')
@@ -80,6 +79,7 @@ def reset_db():
 @app.route('/')
 @app.route('/index')
 def index():
+
     return render_template('index.html')
 
 
