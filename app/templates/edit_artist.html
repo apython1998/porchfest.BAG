@@ -2,7 +2,7 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <h1 class="text-center">Edit Artist Information</h1>
+    <h1 class="text-center">Edit {{ current_user.name }} Info</h1>
     <div class="row">
         <div class="col-md-4 col-md-offset-4 text-center">
             {{ wtf.quick_form(form, button_map={'submit':'warning'}) }}

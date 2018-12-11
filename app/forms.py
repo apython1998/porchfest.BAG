@@ -7,6 +7,8 @@ from app.models import Artist, Location, Porch, Porchfest
 from bson.objectid import ObjectId
 from datetime import datetime
 
+BooleanField.false_values = {False, 'false', ''}
+
 
 class NewArtistForm(FlaskForm):
     bandName = StringField('Band Name', validators=[DataRequired()])
@@ -52,7 +54,7 @@ class EditArtistForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     genre = StringField('Genre', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
-    submit = SubmitField('Register')
+    submit = SubmitField('Submit')
 
     def validate_email(self, email):
         artist = Artist.objects(email=email.data).first()
@@ -69,8 +71,12 @@ class PorchForm(FlaskForm):
     city = StringField('City', validators=[DataRequired()])
     state = StringField('State', validators=[length(min=2, max=2, message="Length should be two letters!")])
     zip = StringField('Zip code', validators=[length(min=5, max=5, message="Should be 5 numbers long!")])
-    time_slots = SelectMultipleField('Times Available', id='timeslot')
+    time_slots = SelectMultipleField('Times Available', validators=[DataRequired()], id='timeslot')
     submit = SubmitField('Submit')
+
+    def validate_email(self, email):
+        if Porch.objects(email=self.email.data).first() is not None:
+            raise ValidationError('Email is already in use for a porch owner!')
 
     def validate_porchfest_id(self, porchfest_id):
         porchfest = Porchfest.objects(id=porchfest_id.data).first()
@@ -92,20 +98,20 @@ class PorchForm(FlaskForm):
 
     def validate_city(self, city):
         fest_location = Location.objects(zip_code=self.zip.data).first()
-        if fest_location.city != city.data:
+        if fest_location is None or fest_location.city != city.data:
             raise ValidationError('Does not match the city of the selected Porchfest!')
 
     def validate_state(self, state):
         fest_location = Location.objects(zip_code=self.zip.data).first()
-        if fest_location.state != state.data:
+        if fest_location is None or fest_location.state != state.data:
             raise ValidationError('Does not match the state of the selected Porchfest!')
 
 
 class ArtistPorchfestSignUpForm(FlaskForm):
-    porchfest = SelectField('Choose a porchfest', validators=[DataRequired()], coerce=ObjectId)
+    porchfest = SelectField('Choose a porchfest', validators=[DataRequired()], id='porchfest')
     time_slot = SelectField('When Will your Show Start', validators=[DataRequired()], id='timeslot')
-    porch = BooleanField('I already have a porch')
-    porch_selector = SelectField('Choose a Porch', id='porchselect', coerce=ObjectId)
+    porch = BooleanField('I already have a porch', id='porch')
+    porch_selector = SelectField('Choose a Porch', validators=[], id='porchselect')
     # can check that location matches with location of selected porchfest
     # maybe validate by checking address exists with map api
     # maybe keep this hidden unless the checkbox is clicked

@@ -14,44 +14,138 @@
 <script>
 $(function() {
 
+    var porch = $('#porch');
+
+    selectOrNewPorch(porch.is(':checked'));
+
+    function selectOrNewPorch(checked) {
+        var porchselect = $('#porchselect');
+        var newPorch = [$('#porch_owner'), $('#porch_email'), $('#address'), $('#city'), $('#state'), $('#zip')];
+        if (checked) {
+            newPorch.forEach(function(field) {
+                field.removeAttr('disabled');
+            });
+            porchselect.attr('disabled', 'disabled');
+        } else {
+            newPorch.forEach(function(field) {
+                field.val('');
+                field.attr('disabled', 'disabled')
+            })
+            porchselect.removeAttr('disabled');
+        }
+
+    }
+
+    $('#porch').click(function(){
+        selectOrNewPorch($(this).is(':checked'));
+    });
+});
+$(function (){
+    var porchfest_timeslots;
+    var porchfest_porches;
+
     // jQuery selection for the 2 select boxes
     var dropdown = {
         porchfest: $('#porchfest'),
-        timeslot: $('#timeslot')
+        timeslot: $('#timeslot'),
+        porchselect: $('#porchselect')
     };
 
-    console.log(dropdown.porchfest.val());
-
-    // call to update on load
-    updateTimeSlots();
-
-    // function to call XHR and update county dropdown
-    function updateTimeSlots() {
+    function get_times_and_porches() {
         var send = {
             porchfest: dropdown.porchfest.val()
         };
-        dropdown.timeslot.attr('disabled', 'disabled');
-        dropdown.timeslot.empty();
-        $.getJSON("{{ url_for('get_time_slots') }}", send, function(data) {
-            data.forEach(function(item) {
-                console.log(item.time_text);
-                console.log(item.time_text);
+        $.getJSON("{{ url_for('get_available_porches_and_timeslots') }}", send, function (data) {
+            porchfest_timeslots = data.time_slots;
+            porchfest_porches = data.available_porches;
+            dropdown.timeslot.attr('disabled', 'disabled');
+            dropdown.timeslot.empty();
+            dropdown.porchselect.attr('disabled', 'disabled');
+            dropdown.porchselect.empty();
+            porchfest_timeslots.forEach(function(item) {
                 dropdown.timeslot.append(
+                        $('<option>', {
+                            value: item.time_text,
+                            text: item.time_text
+                        })
+                    );
+            });
+            dropdown.timeslot.removeAttr('disabled');
+            var available_porches = [];
+            porchfest_porches.forEach(function(item) {
+                if (item.available_times.includes(dropdown.timeslot.val())) {
+                    available_porches.push(item);
+                }
+            });
+            if (available_porches.length == 0) {
+                dropdown.porchselect.append(
                     $('<option>', {
-                        value: item.time_text,
-                        text: item.time_text
+                        value: '',
+                        text: 'There are no available porches for this time slot'
+                    })
+                )
+            } else {
+                available_porches.forEach(function(item) {
+                    dropdown.porchselect.append(
+                        $('<option>', {
+                            value: item.id,
+                            text: item.owner + ": " + item.address
+                        })
+                    );
+                });
+                if (!$('#porch').is(':checked')) {
+                    dropdown.porchselect.removeAttr('disabled');
+                }
+            }
+        })
+    }
+
+    function update_porches() {
+        dropdown.porchselect.attr('disabled', 'disabled');
+        dropdown.porchselect.empty();
+        var available_porches = [];
+        porchfest_porches.forEach(function(item) {
+            if (item.available_times.includes(dropdown.timeslot.val())) {
+                available_porches.push(item);
+            }
+        })
+        if (available_porches.length == 0) {
+            dropdown.porchselect.append(
+                $('<option>', {
+                    value: '',
+                    text: 'There are no available porches for this time slot'
+                })
+            )
+        } else {
+            available_porches.forEach(function(item) {
+                dropdown.porchselect.append(
+                    $('<option>', {
+                        value: item.id,
+                        text: item.owner + ": " + item.address
                     })
                 );
             });
-            dropdown.timeslot.removeAttr('disabled');
-        });
+            if (!$('#porch').is(':checked')) {
+                    dropdown.porchselect.removeAttr('disabled');
+            }
+        }
+
     }
 
     // event listener to state dropdown change
     dropdown.porchfest.on('change', function() {
-        updateTimeSlots();
+        get_times_and_porches();
     });
 
-});
+    dropdown.timeslot.on('change', function() {
+        update_porches();
+    });
+
+
+    $(document).ready(function() {
+        get_times_and_porches();
+    })
+})
+
 </script>
 {% endblock %}

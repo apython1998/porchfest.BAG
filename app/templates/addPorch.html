@@ -35,8 +35,6 @@ $(function() {
         dropdown.timeslot.empty();
         $.getJSON("{{ url_for('get_time_slots') }}", send, function(data) {
             data.forEach(function(item) {
-                console.log(item.time_text);
-                console.log(item.time_text);
                 dropdown.timeslot.append(
                     $('<option>', {
                         value: item.time_text,
