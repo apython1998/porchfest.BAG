@@ -11,3 +11,46 @@
         </div>
     </div>
 {% endblock %}
+{% block scripts %}
+<script>
+$(function() {
+
+    // jQuery selection for the 2 select boxes
+    var dropdown = {
+        porchfest: $('#porchfest'),
+        timeslot: $('#timeslot')
+    };
+
+    console.log(dropdown.porchfest.val());
+
+    // call to update on load
+    updateTimeSlots();
+
+    // function to call XHR and update county dropdown
+    function updateTimeSlots() {
+        var send = {
+            porchfest: dropdown.porchfest.val()
+        };
+        dropdown.timeslot.attr('disabled', 'disabled');
+        dropdown.timeslot.empty();
+        $.getJSON("{{ url_for('get_time_slots') }}", send, function(data) {
+            data.forEach(function(item) {
+                dropdown.timeslot.append(
+                    $('<option>', {
+                        value: item.time_text,
+                        text: item.time_text
+                    })
+                );
+            });
+            dropdown.timeslot.removeAttr('disabled');
+        });
+    }
+
+    // event listener to state dropdown change
+    dropdown.porchfest.on('change', function() {
+        updateTimeSlots();
+    });
+
+});
+</script>
+{% endblock %}

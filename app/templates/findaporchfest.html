@@ -3,14 +3,17 @@
 
 {% block app_content %}
     {{ mymap.js }}
-    <div class="col-xs-4 col-xs-offset-4" id="selectAPorchfest">
-        {{ wtf.quick_form(form) }}
-    </div>
-    <div class="col-xs-6 col-xs-offset-3" id="map">
-        {{ mymap.html }}
-    </div>
-    <div class="col-xs-6 col-xs-offset-3" id="artistList">
-        <b>Select an event to see the artists for a Porchfest</b>
+    <div class="text-center">
+        <div class="col-xs-4 col-xs-offset-4" id="selectAPorchfest">
+            {{ wtf.quick_form(form) }}
+        </div>
+        <div class="col-xs-4 col-xs-offset-4" id="map">
+            <b>MAP GOES HERE</b>
+            {{ mymap.html }}
+        </div>
+        <div class="col-xs-6 col-xs-offset-3" id="artistList">
+            <b>Select an event to see the artists for a Porchfest</b>
+        </div>
     </div>
 {% endblock %}
 {% block scripts %}
@@ -20,29 +23,29 @@
     var artistListElement = document.getElementById("artistList");
     function getArtistsForPorchfest(porchfestID) {
         $.ajax({
-                url: '/_artists_for_porchfest?porchfestID=' + porchfestID,
-                type: 'GET',
-                success: function (artists) {
-                    $("#artistList").empty();
-                    porchfestText = $('#select_porchfest option:selected').text();
-                    if (artists.length === 0) {
-                        artistListElement.innerHTML = "<b>There are no artists for the " + porchfestText + " Porchfest</b>"
-                    } else {
-                        tableHTML = "<label>Artists for " + porchfestText + " Porchfest</label>";
-                        tableHTML += "<table class='table table-bordered bg-light table-hover'>";
-                        artists.forEach(function (artist) {
-                            artistURL = {{ url_for('artist', artist_name='') }}
-                            artistURL += encodeURI(artist);
-                            artistHTML = "<tr><td><b>";
-                            artistHTML += "<a href=" + artistURL + ">" + artist;
-                            artistHTML += "</a></b></td></tr>";
-                            tableHTML += artistHTML;
-                        });
-                        tableHTML += "</table>";
-                        artistListElement.innerHTML = tableHTML;
-                    }
+            url: '/_artists_for_porchfest?porchfestID=' + porchfestID,
+            type: 'GET',
+            success: function (artists) {
+                $("#artistList").empty();
+                porchfestText = $('#select_porchfest option:selected').text();
+                if (artists.length === 0) {
+                    artistListElement.innerHTML = "<b>There are no artists for the " + porchfestText + " Porchfest</b>"
+                } else {
+                    tableHTML = "<label>Artists for the " + porchfestText + " Porchfest</label>";
+                    tableHTML += "<table class='table table-bordered bg-light table-hover'>";
+                    artists.forEach(function (artist) {
+                        artistURL = {{ url_for('artist', artist_name='') }}
+                        artistURL += encodeURI(artist);
+                        artistHTML = "<tr><td><b>";
+                        artistHTML += "<a href=" + artistURL + ">" + artist;
+                        artistHTML += "</a></b></td></tr>";
+                        tableHTML += artistHTML;
+                    });
+                    tableHTML += "</table>";
+                    artistListElement.innerHTML = tableHTML;
                 }
-            });
+            }
+        });
     }
     $(document).ready(function () {
         porchfestID = $('#select_porchfest option:selected').val();

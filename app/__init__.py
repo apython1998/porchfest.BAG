@@ -15,8 +15,9 @@ db = MongoEngine(app)
 login = LoginManager(app)
 login.login_view = 'login'
 bootstrap = Bootstrap(app)
-app.config['GOOGLEMAPS_KEY'] = "AIzaSyCYzkoBrnmcTkdPO6l8IHyPo7PZOAgeg-4"
+app.config['GOOGLEMAPS_KEY'] = os.environ.get('GOOGLEMAPS_KEY')
 GoogleMaps(app)
+
 
 if not app.debug:
     if not os.path.exists('logs'):

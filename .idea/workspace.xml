@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="255e2239-fc57-403c-9063-f370492b9b92" name="Default Changelist" comment="">
+    <list default="true" id="37d99356-ed4f-461f-8cb2-fa71efdc6be2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/addPorch.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/addPorch.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/artist.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/artist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/artistToPorch.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/artistToPorch.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/editArtist.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/edit_artist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/findaporchfest.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/findaporchfest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/porchfest_BAG.log.1" beforeDir="false" />
     </list>
-    <ignored path="" />
+    <ignored path="$PROJECT_DIR$/venv/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,161 +24,99 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/porchfest_BAG$porchfest_BAG.coverage" NAME="porchfest_BAG Coverage Results" MODIFIED="1543343627558" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/porchfest_BAG$forms.coverage" NAME="forms Coverage Results" MODIFIED="1543283489225" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
-  </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand />
-    <select />
+    <SUITE FILE_PATH="coverage/porchfest_BAG$porchfest.coverage" NAME="porchfest Coverage Results" MODIFIED="1544563889131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="1891878294">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.6" value="2" />
-          <entry key="project.open.time.7" value="1" />
-          <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="DATABASE/17ff1d4a-a54d-4aa7-b3a4-83814ac05495" value="1" />
-          <entry key="SCHEMA:main" value="1" />
-          <entry key="databaseDiagram" value="1" />
-          <entry key="gitignore" value="8" />
-          <entry key="html" value="2" />
-          <entry key="location" value="9" />
-          <entry key="md" value="1" />
-          <entry key="png" value="1" />
-          <entry key="porch" value="3" />
-          <entry key="py" value="10" />
-          <entry key="sql" value="8" />
+          <entry key="html" value="6" />
+          <entry key="py" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Database Element" value="12" />
-          <entry key="HTML" value="2" />
-          <entry key="Image" value="1" />
-          <entry key="Markdown" value="1" />
-          <entry key="PLAIN_TEXT" value="9" />
-          <entry key="Python" value="10" />
-          <entry key="Scratch" value="8" />
-          <entry key="UML" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="HTML" value="49" />
-          <entry key="Markdown" value="138" />
-          <entry key="PLAIN_TEXT" value="56" />
-          <entry key="Python" value="4485" />
-          <entry key="Scratch" value="482" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.js.language.service.starts" />
-      <usages-collector id="statistics.vcs.git.usages">
-        <counts>
-          <entry key="git.branch.checkout.remote" value="1" />
-          <entry key="git.branch.merge" value="2" />
+          <entry key="HTML" value="6" />
+          <entry key="Python" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dummy" value="20" />
-          <entry key="gitignore" value="36" />
-          <entry key="html" value="49" />
-          <entry key="md" value="138" />
-          <entry key="py" value="4485" />
-          <entry key="sql" value="482" />
+          <entry key="html" value="2349" />
+          <entry key="py" value="1593" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="HTML" value="2349" />
+          <entry key="Python" value="1593" />
         </counts>
       </usages-collector>
     </session>
     <session id="-1109722644">
-      <usages-collector id="statistics.file.extensions.open">
+      <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="SCHEMA:main" value="1" />
-          <entry key="html" value="7" />
-          <entry key="py" value="5" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="HTML" value="7" />
-          <entry key="Python" value="5" />
-          <entry key="UML" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="2" />
-          <entry key="py" value="3442" />
+          <entry key="py" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="2" />
-          <entry key="Python" value="3442" />
+          <entry key="Python" value="1" />
         </counts>
       </usages-collector>
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="1" />
-          <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.vcs.git.usages" />
-      <usages-collector id="statistics.js.language.service.starts" />
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/artistToPorch.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1938">
+              <caret line="114" column="29" selection-start-line="114" selection-start-column="29" selection-end-line="114" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-
-            <state relative-caret-position="327">
-              <caret line="101" column="37" selection-start-line="101" selection-start-column="37" selection-end-line="101" selection-end-column="37" />
+            <state relative-caret-position="238">
+              <caret line="86" column="4" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="4" />
               <folding>
-                <element signature="e#0#68#0" expanded="true" />
-                <marker date="1543343721498" expanded="true" signature="3777:3782" ph="..." />
-                <marker date="1543343721498" expanded="true" signature="3777:3997" ph="..." />
+                <element signature="e#0#77#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/addPorch.html">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/app/templates/artist.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="799">
+              <caret line="47" column="149" selection-start-line="47" selection-start-column="149" selection-end-line="47" selection-end-column="149" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="107" column="27" lean-forward="true" selection-start-line="107" selection-start-column="27" selection-end-line="107" selection-end-column="27" />
+            <state relative-caret-position="-1434">
+              <caret line="73" column="99" selection-start-line="73" selection-start-column="99" selection-end-line="73" selection-end-column="99" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
-                <marker date="1543343461529" expanded="true" signature="397:402" ph="..." />
-                <marker date="1543343461529" expanded="true" signature="1214:3070" ph="..." />
-                <marker date="1543343461529" expanded="true" signature="3099:3104" ph="..." />
-                <marker date="1543343461529" expanded="true" signature="4636:4641" ph="..." />
-                <marker date="1543343461529" expanded="true" signature="5548:5553" ph="..." />
               </folding>
             </state>
           </provider>
@@ -177,42 +124,17 @@
       </file>
     </leaf>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Flask Main" />
-        <option value="HTML File" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
-    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app.py" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/config.py" />
-        <option value="$PROJECT_DIR$/app/__init__.py" />
-        <option value="$PROJECT_DIR$/porchfest_BAG.py" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/17ff1d4a-a54d-4aa7-b3a4-83814ac05495/console_1.sql" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/dc8d4950-04fb-4253-9aa2-665d90f4e40e/console.sql" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/aaa3c470-c7fa-40e0-bb51-9eef67fd72dd/console.sql" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/b476d7ea-9815-4dfd-b9cd-b796cd59a834/console.sql" />
-        <option value="$PROJECT_DIR$/app/templates/index.html" />
-        <option value="$PROJECT_DIR$/app/models.py" />
-        <option value="$PROJECT_DIR$/app/templates/base.html" />
+        <option value="$PROJECT_DIR$/app/templates/edit_artist.html" />
+        <option value="$PROJECT_DIR$/app/templates/artistToPorch.html" />
+        <option value="$PROJECT_DIR$/app/templates/artist.html" />
         <option value="$PROJECT_DIR$/app/forms.py" />
         <option value="$PROJECT_DIR$/app/routes.py" />
-        <option value="$PROJECT_DIR$/app/models.py" />
-        <option value="$PROJECT_DIR$/app/templates/findaporchfest.html" />
-        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -222,17 +144,16 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-9" />
-    <option name="width" value="940" />
-    <option name="height" value="1015" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -255,21 +176,14 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="sqlite" />
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="database.console.LAST_STATE" value="false" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/templates" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -285,14 +199,15 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="porchfest_BAG" type="Python.FlaskServer" factoryName="Flask server">
+    <configuration name="porchfest" type="Python.FlaskServer" factoryName="Flask server">
+      <option name="additionalOptions" value="" />
+      <option name="application" value="" />
       <module name="porchfest_BAG" />
-      <option name="target" value="$PROJECT_DIR$/porchfest_BAG.py" />
-      <option name="targetType" value="PATH" />
+      <option name="target" value="porchfest_BAG.py" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
@@ -306,11 +221,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="255e2239-fc57-403c-9063-f370492b9b92" name="Default Changelist" comment="" />
-      <created>1542133181967</created>
+      <changelist id="37d99356-ed4f-461f-8cb2-fa71efdc6be2" name="Default Changelist" comment="" />
+      <created>1544546050084</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1542133181967</updated>
+      <updated>1544546050084</updated>
     </task>
     <servers />
   </component>
@@ -318,30 +233,27 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13355705" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12214765" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
-
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22553192" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.23122239" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32891566" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50143063" side_tool="true" weight="0.3939759" />
-      <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="12" sideWeight="0.4985694" visible="true" weight="0.3939759" />
-      <window_info anchor="bottom" id="Python Console" order="13" />
-      <window_info anchor="bottom" id="Database Console" order="14" weight="0.32891566" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32891566" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="right" id="Database" order="4" weight="0.2436751" />
+      <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -350,237 +262,62 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app/routes.py</url>
-          <line>56</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/forms.py">
+    <entry file="file://$PROJECT_DIR$/app/templates/findaporchfest.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="45">
-            <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="42" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/porchfest_BAG.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="72" selection-start-line="1" selection-start-column="72" selection-end-line="1" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/databaseDiagram" />
-    <entry file="uml://DATABASE/17ff1d4a-a54d-4aa7-b3a4-83814ac05495">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>DATABASE</ID>
-          <OriginalElement>17ff1d4a-a54d-4aa7-b3a4-83814ac05495</OriginalElement>
-          <nodes>
-            <node x="" y="">17ff1d4a-a54d-4aa7-b3a4-83814ac05495.TABLE:main.alembic_version</node>
-            <node x="" y="">17ff1d4a-a54d-4aa7-b3a4-83814ac05495.TABLE:main.porchfest</node>
-            <node x="" y="">17ff1d4a-a54d-4aa7-b3a4-83814ac05495.TABLE:main.sqlite_master</node>
-            <node x="" y="">17ff1d4a-a54d-4aa7-b3a4-83814ac05495.TABLE:main.porch</node>
-            <node x="" y="">17ff1d4a-a54d-4aa7-b3a4-83814ac05495.TABLE:main.location</node>
-            <node x="" y="">17ff1d4a-a54d-4aa7-b3a4-83814ac05495.TABLE:main.artist</node>
-            <node x="" y="">17ff1d4a-a54d-4aa7-b3a4-83814ac05495.TABLE:main.artist_to_porch</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="0.8550561797752808" x="321.0" y="436.0" />
-          <SelectedNodes />
-          <Categories>
-            <Category>Key columns</Category>
-            <Category>Columns</Category>
-          </Categories>
-          <SCOPE>All</SCOPE>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/17ff1d4a-a54d-4aa7-b3a4-83814ac05495/console.sql">
+    <entry file="file://$PROJECT_DIR$/app/templates/signUp.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/17ff1d4a-a54d-4aa7-b3a4-83814ac05495/console_1.sql">
+    <entry file="file://$PROJECT_DIR$/app/templates/edit_artist.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="73" selection-start-line="3" selection-start-column="73" selection-end-line="3" selection-end-column="73" />
+        <state relative-caret-position="60">
+          <caret line="4" column="61" selection-start-line="4" selection-start-column="61" selection-end-line="4" selection-end-column="61" />
         </state>
       </provider>
     </entry>
-    <entry file="das://dc8d4950-04fb-4253-9aa2-665d90f4e40e/schema/main/table/porch" />
-    <entry file="das://dc8d4950-04fb-4253-9aa2-665d90f4e40e/schema/main/table/location" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/dc8d4950-04fb-4253-9aa2-665d90f4e40e/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="23" lean-forward="true" selection-start-column="23" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://aaa3c470-c7fa-40e0-bb51-9eef67fd72dd/schema/main/table/location" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/aaa3c470-c7fa-40e0-bb51-9eef67fd72dd/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="68" selection-start-line="6" selection-start-column="68" selection-end-line="6" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/b476d7ea-9815-4dfd-b9cd-b796cd59a834/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://b476d7ea-9815-4dfd-b9cd-b796cd59a834/schema/main/table/porch" />
-    <entry file="file://$PROJECT_DIR$/app/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://b476d7ea-9815-4dfd-b9cd-b796cd59a834/schema/main/table/location" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/8b3d315e-6ee5-4f55-a070-0e05aabd7d6a/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="das://8b3d315e-6ee5-4f55-a070-0e05aabd7d6a/schema/main/table/location">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://8b3d315e-6ee5-4f55-a070-0e05aabd7d6a/schema/main/table/porch">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphDiagram.png" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-            <marker date="1542150539710" expanded="true" signature="237:2659" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/editArtist.html" />
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.7/site-packages/alembic/util/__init__.py" />
     <entry file="file://$PROJECT_DIR$/app/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="88" column="73" selection-start-line="88" selection-start-column="73" selection-end-line="88" selection-end-column="73" />
+        <state relative-caret-position="-396">
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/signUp.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/artistToPorch.html">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1938">
+          <caret line="114" column="29" selection-start-line="114" selection-start-column="29" selection-end-line="114" selection-end-column="29" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/artist.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        <state relative-caret-position="799">
+          <caret line="47" column="149" selection-start-line="47" selection-start-column="149" selection-end-line="47" selection-end-column="149" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://DATABASE/8b3d315e-6ee5-4f55-a070-0e05aabd7d6a.SCHEMA:main">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>DATABASE</ID>
-          <OriginalElement>8b3d315e-6ee5-4f55-a070-0e05aabd7d6a.SCHEMA:main</OriginalElement>
-          <nodes>
-            <node x="" y="">8b3d315e-6ee5-4f55-a070-0e05aabd7d6a.TABLE:main.artist</node>
-            <node x="" y="">8b3d315e-6ee5-4f55-a070-0e05aabd7d6a.TABLE:main.alembic_version</node>
-            <node x="" y="">8b3d315e-6ee5-4f55-a070-0e05aabd7d6a.TABLE:main.porchfest</node>
-            <node x="" y="">8b3d315e-6ee5-4f55-a070-0e05aabd7d6a.TABLE:main.porch</node>
-            <node x="" y="">8b3d315e-6ee5-4f55-a070-0e05aabd7d6a.TABLE:main.artist_to_porch</node>
-            <node x="" y="">8b3d315e-6ee5-4f55-a070-0e05aabd7d6a.TABLE:main.location</node>
-            <node x="" y="">8b3d315e-6ee5-4f55-a070-0e05aabd7d6a.TABLE:main.sqlite_master</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="0.4561186650185414" x="595.1056910569106" y="421.0" />
-          <SelectedNodes />
-          <Categories>
-            <Category>Key columns</Category>
-            <Category>Columns</Category>
-          </Categories>
-          <SCOPE>All</SCOPE>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/addPorch.html">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="107" column="27" lean-forward="true" selection-start-line="107" selection-start-column="27" selection-end-line="107" selection-end-column="27" />
+        <state relative-caret-position="-1434">
+          <caret line="73" column="99" selection-start-line="73" selection-start-column="99" selection-end-line="73" selection-end-column="99" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
-            <marker date="1543343461529" expanded="true" signature="397:402" ph="..." />
-            <marker date="1543343461529" expanded="true" signature="1214:3070" ph="..." />
-            <marker date="1543343461529" expanded="true" signature="3099:3104" ph="..." />
-            <marker date="1543343461529" expanded="true" signature="4636:4641" ph="..." />
-            <marker date="1543343461529" expanded="true" signature="5548:5553" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="101" column="37" selection-start-line="101" selection-start-column="37" selection-end-line="101" selection-end-column="37" />
+        <state relative-caret-position="238">
+          <caret line="86" column="4" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="4" />
           <folding>
-            <element signature="e#0#68#0" expanded="true" />
-            <marker date="1543343721498" expanded="true" signature="3777:3782" ph="..." />
-            <marker date="1543343721498" expanded="true" signature="3777:3997" ph="..." />
-
+            <element signature="e#0#77#0" expanded="true" />
           </folding>
-
         </state>
       </provider>
     </entry>

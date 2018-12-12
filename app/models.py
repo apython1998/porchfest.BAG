@@ -52,6 +52,7 @@ class Porch(db.Document):
     time_available_end = db.DateTimeField(default=datetime.utcnow)
     lat = db.DecimalField()
     long = db.DecimalField()
+    time_slots = db.ListField(db.DateTimeField())
     meta = {
         'indexes': [
             {'fields': ('address', 'location'), 'unique': True}
@@ -69,7 +70,7 @@ class Show(db.Document):
     end_time = db.DateTimeField(default=datetime.utcnow)
     meta = {
         'indexes': [
-            {'fields': ('artist', 'porch'), 'unique': True}
+            {'fields': ('artist', 'start_time'), 'unique': True}
         ]
     }
 
@@ -80,7 +81,7 @@ class Show(db.Document):
 class Porchfest(db.Document):
     location = db.ReferenceField(Location)
     start_time = db.DateTimeField(default=datetime.utcnow)
-    end_time = db.DateTimeField()
+    end_time = db.DateTimeField(default=datetime.utcnow)
     porches = db.ListField(db.ReferenceField(Porch, reverse_delete_rule=db.CASCADE))
     shows = db.ListField(db.ReferenceField(Show, reverse_delete_rule=db.CASCADE))
     meta = {
