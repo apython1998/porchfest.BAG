@@ -87,13 +87,14 @@ def index():
 def findaporchfest():
     default = Porchfest.objects(location=Location.objects(zip_code='14850').first()).first()
     form = FindAPorchfestForm(porchfest=default.id)
+    form.porchfest.choices = [("", "---")]+[(p.id, p.location.city+', '+p.location.state) for p in Porchfest.objects()]
     markers = []
     for p in default.porches:
         markers.append((p.lat, p.long))
     # need a default lat and long for each fest to not crash if there are no porches
     myMap = Map(
         identifier="view_side",
-        lat=markers[0].lat,
+        lat=42.438657,
         lng=-76.4951,
         markers=[]
     )
