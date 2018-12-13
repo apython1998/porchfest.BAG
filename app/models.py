@@ -48,9 +48,11 @@ class Porch(db.Document):
     email = db.StringField(unique=True)
     address = db.StringField()
     location = db.ReferenceField(Location)
+    time_available_start = db.DateTimeField(default=datetime.utcnow)
+    time_available_end = db.DateTimeField(default=datetime.utcnow)
+    lat = db.StringField()
+    long = db.StringField()
     time_slots = db.ListField(db.DateTimeField())
-    lat = db.FloatField()
-    long = db.FloatField()
     meta = {
         'indexes': [
             {'fields': ('address', 'location'), 'unique': True}
@@ -82,6 +84,8 @@ class Porchfest(db.Document):
     end_time = db.DateTimeField(default=datetime.utcnow)
     porches = db.ListField(db.ReferenceField(Porch, reverse_delete_rule=db.CASCADE))
     shows = db.ListField(db.ReferenceField(Show, reverse_delete_rule=db.CASCADE))
+    lat = db.StringField()
+    long = db.StringField()
     meta = {
         'indexes': [
             {'fields': ('location', 'start_time'), 'unique': True}

@@ -1,3 +1,4 @@
+import requests
 from flask import render_template, url_for, redirect, flash, request, jsonify
 from werkzeug.urls import url_parse
 from app import app, db
@@ -37,8 +38,9 @@ def reset_db():
     for location in default_locations:
         location.save(cascade=True)
     default_porches = [
-        Porch(name='Ithaca Porch 1', email='ithacaPorch1@email.com', address='953 Danby Rd', location=Location.objects(city='Ithaca', state='NY').first(), time_slots=[times[2], times[3]]),
-        Porch(name='Ithaca Porch 2', email='ithacaPorch2@email.com', address='123 Ithaca Rd', location=Location.objects(city='Ithaca', state='NY').first(), time_slots=[times[0], times[1], times[3]])
+        Porch(name='Ithaca Porch 1', email='ithacaPorch1@email.com', address='953 Danby Rd', location=Location.objects(city='Ithaca', state='NY').first(), time_slots=[times[2], times[3]], lat='42.4199351', long='-76.4969643'),
+        Porch(name='Ithaca Porch 2', email='ithacaPorch2@email.com', address='123 Ithaca Rd', location=Location.objects(city='Ithaca', state='NY').first(), time_slots=[times[0], times[1], times[3]], lat='42.438657', long='-76.4800496'),
+        Porch(name='Albany Porch 1', email='albanyPorch2@email.com', address='501 Hudson Ave', location=Location.objects(city='Albany', state='NY').first(), time_slots=[times[0], times[1], times[3]], lat='42.662079', long='-73.780703'),
     ]
     for porch in default_porches:
         porch.save(cascade=True)
@@ -58,15 +60,16 @@ def reset_db():
              start_time=times[0], end_time=times[2]),
         Show(artist=Artist.objects(name='Artist 1').first(), porch=Porch.objects(name='Ithaca Porch 2').first(),
              start_time=times[2], end_time=times[3]),
+        Show(artist=Artist.objects(name='Artist 2').first(), porch=Porch.objects(name='Albany Porch 1').first(), start_time=times[2], end_time=times[3])
     ]
     for show in default_shows:
         show.save(cascade=True)
     default_porchfests = [
         Porchfest(location=Location.objects(city='Ithaca', state='NY').first(), start_time=times[0], end_time=times[1],
                   porches=[Porch.objects(name='Ithaca Porch 1').first(), Porch.objects(name='Ithaca Porch 2').first()],
-                  shows=[Show.objects(artist=Artist.objects(name='Artist 1').first()).first()]),
-        Porchfest(location=Location.objects(city='Binghamton', state='NY').first(), start_time=times[0], end_time=times[1]),
-        Porchfest(location=Location.objects(city='Albany', state='NY').first(), start_time=times[0], end_time=times[1])
+                  shows=[Show.objects(artist=Artist.objects(name='Artist 1').first()).first(), Show.objects(porch=Porch.objects(name='Ithaca Porch 2').first()).first()], lat='42.4440', long='-76.5019'),
+        Porchfest(location=Location.objects(city='Binghamton', state='NY').first(), start_time=times[0], end_time=times[1], lat='42.0987', long='-75.9180'),
+        Porchfest(location=Location.objects(city='Albany', state='NY').first(), start_time=times[0], end_time=times[1], lat='42.6526', long='-73.7562', shows=[Show.objects(porch=Porch.objects(name='Albany Porch 1').first()).first()])
     ]
     for porchfest in default_porchfests:
         porchfest.save(cascade=True)
@@ -84,19 +87,30 @@ def index():
 def findaporchfest():
     default = Porchfest.objects(location=Location.objects(zip_code='14850').first()).first()
     form = FindAPorchfestForm(porchfest=default.id)
-    form.porchfest.choices = [("", "---")] + [(p.id, p.location.city + ", " + p.location.state+" "+p.start_time.strftime("%m-%d-%Y %H:%M")+" to "+p.end_time.strftime("%m-%d-%Y %H:%M")) for p in Porchfest.objects()]
-    # GOOGLE_MAPS_API_URL = 'http://maps.googleapis.com/maps/api/geocode/json'
-
+    form.porchfest.choices = [("", "---")] + [(p.id,
+                                           p.location.city + ", " + p.location.state + " " + p.start_time.strftime(
+                                               "%m-%d-%Y %H:%M") + " to " + p.end_time.strftime("%m-%d-%Y %H:%M")) for p
+                                          in Porchfest.objects()]
+    markers = []
+    # get from shows not porches
+    for s in default.shows:
+        markers.append((float(s.porch.lat), float(s.porch.long), "<a href='{}'> {} </a><br><p>{}</p><br><p>{}</p>".format(url_for('artist', artist_name=s.artist.name), s.artist.name, s.porch.address, s.start_time.strftime("%m-%d-%Y %H:%M"))))
+    # need a default lat and long for each fest to not crash if there are no porches
     myMap = Map(
-        identifier="view_side",
-        lat=37.4419,
-        lng=-122.1419,
-        markers=[(37.4419, -122.1419)]
+        identifier="fest_map",
+        lat=float(default.lat),
+        lng=float(default.long),
+        markers=markers,
+        fit_markers_to_bounds=True,
+        style='height:300px;width:100%;margin:0;',
+        maptype_control=False,
+        streetview_control=False,
+        icon='http://maps.google.com/mapfiles/ms/icons/red-dot.png'
     )
     return render_template('findaporchfest.html', form=form, mymap=myMap)
 
 
-@app.route('/_artists_for_porchfest') # restful lookup for findaporchfest page
+@app.route('/_artists_for_porchfest')  # restful lookup for findaporchfest page
 def artists_for_porchfest():
     porchfest_id = request.args.get('porchfestID', '')
     porchfest = Porchfest.objects.get(id=porchfest_id)
@@ -106,6 +120,23 @@ def artists_for_porchfest():
         if artist_name not in porchfest_artists:
             porchfest_artists.append(artist_name)
     return jsonify(porchfest_artists)
+
+
+@app.route('/_shows_for_porchfest')  # restful lookup for findaporchfest page
+def shows_for_porchfest():
+    porchfest_id = request.args.get('porchfestID', '')
+    porchfest = Porchfest.objects.get(id=porchfest_id)
+    porchfest_shows = []
+    for show in porchfest.shows:
+        porch_coordinates = {'lat': float(show.porch.lat), 'long': float(show.porch.long), 'info': "<a href='{}'> {} </a><br><p>{}</p><p>{}</p>".format(url_for('artist', artist_name=show.artist.name), show.artist.name, show.porch.address, show.start_time.strftime("%m-%d-%Y %H:%M"))}
+        if porch_coordinates not in porchfest_shows:
+            porchfest_shows.append(porch_coordinates)
+    map_data = {
+        'lat': float(porchfest.lat),
+        'long': float(porchfest.long),
+        'markers': porchfest_shows
+    }
+    return jsonify(map_data)
 
 
 @app.route('/artist/<artist_name>')
@@ -251,7 +282,20 @@ def addPorch():
                 else:
                     hour = hour_int + 12
             time_slots.append(datetime(year=int(porchfest_time.year), month=int(porchfest_time.month), day=int(porchfest_time.day), hour=hour))
-        newPorch = Porch(name=form.name.data, email=form.email.data, address=form.address.data, location=location, time_slots=time_slots)
+
+        address = form.address.data.split(' ')
+        reqStr = "https://maps.googleapis.com/maps/api/geocode/json?address="
+        for i in address:
+            reqStr = reqStr + i + "+"
+        reqStr = reqStr[:-1]
+        reqStr = reqStr + location.city + ",+" + location.state + "&key=AIzaSyCYzkoBrnmcTkdPO6l8IHyPo7PZOAgeg-4"
+        res = requests.get(reqStr)
+        resJSON = res.json()
+        data = resJSON['results'][0]
+        lat = data['geometry']['location']['lat']
+        long = data['geometry']['location']['lng']
+
+        newPorch = Porch(name=form.name.data, email=form.email.data, address=form.address.data, location=location, time_slots=time_slots, lat=str(lat), long=str(long))
         newPorch.save(cascade=True)
         porchfest.porches.append(newPorch)
         porchfest.save(cascade=True)
@@ -320,7 +364,18 @@ def artistFestSignUp():
             porch = Porch.objects(address=form.address.data).first()
             if porch is None:
                 time_slots = []
-                porch = Porch(name=form.porch_owner.data, email=form.porch_email.data, address=form.address.data, location=location, time_slots=time_slots)
+                address = form.address.data.split(' ')
+                reqStr = "https://maps.googleapis.com/maps/api/geocode/json?address="
+                for i in address:
+                    reqStr = reqStr + i + "+"
+                reqStr = reqStr[:-1]
+                reqStr = reqStr + location.city + ",+" + location.state + "&key=AIzaSyCYzkoBrnmcTkdPO6l8IHyPo7PZOAgeg-4"
+                res = requests.get(reqStr)
+                resJSON = res.json()
+                data = resJSON['results'][0]
+                lat = data['geometry']['location']['lat']
+                long = data['geometry']['location']['lng']
+                porch = Porch(name=form.porch_owner.data, email=form.porch_email.data, address=form.address.data, location=location, time_slots=time_slots, lat=str(lat), long=str(long))
                 porch.save(cascade=True)
         else:
             porch = Porch.objects(id=form.porch_selector.data).first()

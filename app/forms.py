@@ -69,7 +69,7 @@ class PorchForm(FlaskForm):
     # maybe validate by checking address exists with map api
     address = StringField('Address', validators=[DataRequired()])
     city = StringField('City', validators=[DataRequired()])
-    state = StringField('State', validators=[length(min=2, max=2, message="Length should be two letters!")])
+    state = StringField('State Abbreviation', validators=[length(min=2, max=2, message="Length should be two letters!")])
     zip = StringField('Zip code', validators=[length(min=5, max=5, message="Should be 5 numbers long!")])
     time_slots = SelectMultipleField('Times Available', validators=[DataRequired()], id='timeslot')
     submit = SubmitField('Submit')

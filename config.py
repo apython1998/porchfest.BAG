@@ -10,3 +10,4 @@ class Config(object):
         'db': 'porchfestBAG',
         'host': 'mongodb://localhost/porchfestBAG'
     }
+
