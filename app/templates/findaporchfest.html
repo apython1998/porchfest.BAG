@@ -4,15 +4,24 @@
 {% block app_content %}
     {{ mymap.js }}
     <div class="text-center">
-        <div class="col-xs-4 col-xs-offset-4" id="selectAPorchfest">
-            {{ wtf.quick_form(form) }}
+        <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6 text-center" id="selectAPorchfest" >
+                {{ wtf.quick_form(form) }}
+            </div>
+            <div class="col-xs-3"></div>
         </div>
-        <div class="col-xs-4 col-xs-offset-4" id="map">
-            <b>MAP GOES HERE</b>
-            {{ mymap.html }}
+        <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6" id="map">
+                {{ mymap.html }}
+            </div>
+            <div class="col-xs-3"></div>
         </div>
+        <div class="row">
         <div class="col-xs-6 col-xs-offset-3" id="artistList">
             <b>Select an event to see the artists for a Porchfest</b>
+        </div>
         </div>
     </div>
 {% endblock %}
@@ -45,6 +54,62 @@
                     artistListElement.innerHTML = tableHTML;
                 }
             }
+        });
+        $.ajax({
+           url: '/_shows_for_porchfest?porchfestID=' + porchfestID,
+           type: 'GET',
+           success: function (map_data) {
+                var map = document.getElementById("fest_map");
+
+               document.getElementById('fest_map').style.display = 'block';
+               map = new google.maps.Map(
+                       document.getElementById('fest_map'), {
+                       center: new google.maps.LatLng(map_data['lat'], map_data['long']),
+                       zoom: 13,
+                       mapTypeId: google.maps.MapTypeId.ROADMAP,
+                       zoomControl: true,
+                       mapTypeControl: false,
+                       scaleControl: true,
+                       streetViewControl: false,
+                       rotateControl: true,
+                       scrollwheel: true,
+                       fullscreenControl: true
+                   });
+
+               var raw_markers = [];
+
+               for(i=0; i<map_data['markers'].length; i++){
+                   raw_markers.push({"icon": "//maps.google.com/mapfiles/ms/icons/red-dot.png", "infobox": map_data['markers'][i]['info'], "lat": map_data['markers'][i]['lat'], "lng": map_data['markers'][i]['long']})
+               }
+
+               for(i=0; i<1;i++) {
+                map_markers[i] = new google.maps.Marker({
+                    position: new google.maps.LatLng(raw_markers[i].lat, raw_markers[i].lng),
+                    map: map,
+                    icon: raw_markers[0].icon,
+                    title: raw_markers[i].title ? raw_markers[i].title : null
+                });
+
+                if(raw_markers[i].infobox)
+                    {
+                    google.maps.event.addListener(
+                        map_markers[i],
+                        'click',
+                        getInfoCallback(map, raw_markers[i].infobox)
+                    );
+                    }
+                }
+
+
+                // fit all markers in bounds
+                var map_bounds = new google.maps.LatLngBounds();
+                for(i=0; i<map_markers.length;i++) {
+                    map_bounds.extend(map_markers[i].getPosition());
+                };
+                map.fitBounds(map_bounds);
+
+
+           }
         });
     }
     $(document).ready(function () {

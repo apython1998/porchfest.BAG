@@ -1,3 +1,4 @@
+requests
 alembic==1.0.2
 blinker==1.4
 Click==7.0
