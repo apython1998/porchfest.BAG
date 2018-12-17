@@ -288,7 +288,7 @@ def addPorch():
         for i in address:
             reqStr = reqStr + i + "+"
         reqStr = reqStr[:-1]
-        reqStr = reqStr + location.city + ",+" + location.state + "&key=" + app.config['GOOGLEMAPS_KEY']
+        reqStr = reqStr + location.city + ",+" + location.state + "&key=AIzaSyCyYdTV2S7xcja9wFCxbfB7P-bHGi2SLiY"
         res = requests.get(reqStr)
         resJSON = res.json()
         data = resJSON['results'][0]
@@ -369,7 +369,7 @@ def artistFestSignUp():
                 for i in address:
                     reqStr = reqStr + i + "+"
                 reqStr = reqStr[:-1]
-                reqStr = reqStr + location.city + ",+" + location.state + "&key=" + app.config['GOOGLEMAPS_KEY']
+                reqStr = reqStr + location.city + ",+" + location.state + "&key=AIzaSyCyYdTV2S7xcja9wFCxbfB7P-bHGi2SLiY"
                 res = requests.get(reqStr)
                 resJSON = res.json()
                 data = resJSON['results'][0]
