@@ -282,13 +282,13 @@ def addPorch():
                 else:
                     hour = hour_int + 12
             time_slots.append(datetime(year=int(porchfest_time.year), month=int(porchfest_time.month), day=int(porchfest_time.day), hour=hour))
-
+        local_app = app
         address = form.address.data.split(' ')
         reqStr = "https://maps.googleapis.com/maps/api/geocode/json?address="
         for i in address:
             reqStr = reqStr + i + "+"
         reqStr = reqStr[:-1]
-        reqStr = reqStr + location.city + ",+" + location.state + "&key=AIzaSyCyYdTV2S7xcja9wFCxbfB7P-bHGi2SLiY"
+        reqStr = reqStr + location.city + ",+" + location.state + "&key=" + app.config['GOOGLEMAPS_KEY']
         res = requests.get(reqStr)
         resJSON = res.json()
         data = resJSON['results'][0]
@@ -369,7 +369,7 @@ def artistFestSignUp():
                 for i in address:
                     reqStr = reqStr + i + "+"
                 reqStr = reqStr[:-1]
-                reqStr = reqStr + location.city + ",+" + location.state + "&key=AIzaSyCyYdTV2S7xcja9wFCxbfB7P-bHGi2SLiY"
+                reqStr = reqStr + location.city + ",+" + location.state + "&key=" + app.config['GOOGLEMAPS_KEY']
                 res = requests.get(reqStr)
                 resJSON = res.json()
                 data = resJSON['results'][0]
