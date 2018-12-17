@@ -15,7 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/porchfest_BAG$porchfest.coverage" NAME="porchfest Coverage Results" MODIFIED="1544673350721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/porchfest_BAG$porchfest.coverage" NAME="porchfest Coverage Results" MODIFIED="1545072253440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="1891878294">
@@ -234,8 +234,6 @@
   </component>
   <component name="RunManager">
     <configuration name="porchfest" type="Python.FlaskServer" factoryName="Flask server">
-      <option name="additionalOptions" value="" />
-      <option name="application" value="" />
       <module name="porchfest_BAG" />
       <option name="target" value="C:\Users\bnkei\Desktop\comp 205\porchfest_BAG\porchfest_BAG.py" />
       <option name="targetType" value="PATH" />
